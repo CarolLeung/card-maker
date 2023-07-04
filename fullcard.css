@@ -1,0 +1,64 @@
+.fullcard .cardBack {
+  background-color: white !important;
+}
+
+.fullcard .topLeft {
+  background-color: #ffffffa3;
+  border-radius: 4px 12px 24px 0px;
+  width: 65%;
+  top: -1px;
+  /* box-shadow: inset 0px 0px 2px; */
+}
+
+.fullcard .topRight {
+  background: #000000ad;
+  top: -1px;
+
+  color: white;
+  width: 100%;
+  text-align: right;
+  text-shadow: 0px 0px 3px black;
+}
+
+.fullcard .icon {
+  border: 1.5px solid white;
+}
+
+.fullcard .imageHalf {
+  border-color: transparent;
+  overflow: initial;
+}
+
+.fullcard .attackHalf {
+  color: black;
+  text-shadow: 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white;
+}
+
+.fullcard .attackDescription {
+  margin-bottom: 0;
+}
+
+.fullcard .imageDesc {
+  display: none;
+}
+
+.fullcard .attackHalf {
+  background: linear-gradient(transparent, white);
+  bottom: 0;
+  position: absolute;
+  padding-top: 60px;
+}
+
+.fullcard .otherDescription {
+  bottom: 3px;
+  top: unset;
+  background: linear-gradient(to bottom, rgba(76,76,76,1) 0%, rgba(102,102,102,1) 16%,rgba(44,44,44,1) 29%,rgba(0,0,0,1) 35%,rgba(17,17,17,1) 77%,rgba(91,91,91,1) 93%);
+  border-radius: 10px;
+  text-align: left;
+  height: 15px;
+  color: white;
+  padding-left: 10px;
+  line-height: 15px;
+  width: calc(70% - 10px);
+  font-size: 6px;
+}

@@ -1,0 +1,100 @@
+body {
+  font-family: system-ui;
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flexSection {
+  flex: 50%;
+}
+
+.card {
+  margin: 11px 6px;
+  float: left;
+}
+
+.cardBorder {
+  position: relative;
+  background-color: #d4d4d4;
+  height: 332.6px;
+  width: 238px;
+  margin: auto;
+  border-radius: 8px;
+}
+
+.cardBack {
+  position: relative;
+  /* background-color: #7B62A3; */
+  height: 93%;
+  width: 90%;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.texture {
+  position: absolute;
+  height: 310px;
+  width: 214px;
+  opacity: 0.4;
+
+  background-image: url("https://www.transparenttextures.com/patterns/fresh-snow.png");
+}
+
+.evolutionStage {
+  position: absolute;
+  left: -5px;
+  top: 7px;
+  display: none;
+}
+
+.imageHalf {
+  position: relative;
+  border: 2px solid #ffffffb8;
+  float: left;
+  width: 90%;
+  height: 40%;
+  margin: 0 10px;
+  overflow: hidden;
+  /* box-shadow: 0 0 5px white; */
+}
+
+.topLeft {
+  position: absolute;
+  z-index: 3;
+  text-shadow: 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white;
+}
+
+.topRight {
+  position: relative;
+  float: right;
+  z-index: 2;
+  padding-right: 5px;
+  text-shadow: 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white;
+}
+
+.attackHalf {
+  position: relative;
+  /* height: calc(40% - 20px);; */
+  float: left;
+  width: calc(100% - 20px);
+  padding: 5px 10px;
+  text-shadow: 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white, 0px 0px 3px white;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  float: left;
+  width: calc(100% - 20px);
+  text-align: right;
+  font-size: 7px;
+  padding: 10px;
+  display: none;
+}

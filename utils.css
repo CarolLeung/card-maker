@@ -1,0 +1,139 @@
+/* name, level, hp */
+.title {
+  font-weight: bold;
+  position: relative;
+  font-family: 'Oswald', sans-serif;
+  text-transform: capitalize;
+}
+
+/* level, hp descriptor */
+.subtitle {
+  position: relative;
+  text-transform: uppercase;
+  font-size: 8px;
+  font-weight: bold;
+  font-family: 'Oswald', sans-serif;
+  z-index: 2;
+}
+
+.cardName {
+  margin-left: 10px;
+}
+
+.stageHead {
+  position: relative;
+  z-index: 3;
+  width: 30px;
+  text-transform: uppercase;
+  background: linear-gradient(to bottom, rgba(206,206,206,1) 0%,rgba(255,255,255,1) 50%,rgba(150,150,150,1) 100%);
+  font-size: 6px;
+  border-radius: 20px 9px;
+  transform: skewX(-10deg);
+
+  color: black;
+  font-weight: bold;
+  font-family: 'Sriracha', cursive;
+
+  /* box-shadow: 0.5px 0.5px 1px black; */
+}
+
+.basic {
+  display: none;
+}
+
+.basic span {
+  margin-left: 5px !important;
+  top: 0px !important;
+}
+
+.stageHead span:not(.stageNumber) {
+  top: -0.5px;
+  position: relative;
+  margin-left: 4px;
+}
+
+.stageHead span.stageNumber {
+  font-size: 9px;
+  line-height: 10px;
+}
+
+.stageImg {
+  position: relative;
+  z-index: 2;
+  height: 23px;
+  width: 23px;
+  border-radius: 11px 5px;
+  border: 2px solid #7B7D7D;
+  background: linear-gradient(130deg, rgba(206,206,206,1) 0%,rgba(255,255,255,1) 50%,rgba(150,150,150,1) 100%);
+  /* box-shadow: 0.5px 0.5px 1px black; */
+  top: -2px;
+  left: 1px;
+}
+
+.stageTextContainer {
+  position: relative;
+  z-index: 1;
+  transform: skewX(-50deg);
+  background: linear-gradient(130deg, rgba(206,206,206,1) 0%,rgba(255,255,255,1) 50%,rgba(150,150,150,1) 100%);
+  width: 100px;
+  left: 20px;
+  height: 9px;
+  top: -21px;
+  /* box-shadow: 1px 1px 1px black; */
+}
+
+.stageText {
+  z-index: 2;
+  font-weight: bold;
+  font-size: 6px;
+  position: relative;
+  top: -29px;
+  left: 33px;
+  font-style: italic;
+}
+
+.mainImg {
+  position: absolute;
+  width: 100%;
+}
+
+.imageDesc {
+  background: linear-gradient(to bottom, rgba(206,206,206,1) 0%,rgba(255,255,255,1) 50%,rgba(150,150,150,1) 100%);
+  text-align: center;
+  height: 12px;
+  float: left;
+  width: 95%;
+  position: relative;
+  font-size: 8px;
+  border-radius: 10px;
+  left: 50%;
+  top: -2px;
+  transform: translateX(-50%);
+  font-family: 'Patrick Hand', cursive;
+  display: none;
+}
+
+
+/* attack name and attack damage */
+.attackName {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.attackDescription {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+/* weakness, resistance subtitle */
+.subtitle2 {
+  text-transform: lowercase;
+}
+
+.otherDescription {
+  position: absolute;
+  right: 3px;
+  top: -3px;
+  width: 50%;
+  font-family: 'Handlee', cursive;
+}
