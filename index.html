@@ -1,0 +1,77 @@
+<!doctype html>
+<html ng-app="mainApp">
+  <head>
+    <!-- scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="cardData.js"></script>
+    <script src="index.js"></script>
+
+    <!-- components -->
+    <!-- <script src="components/baseCard.js"></script> -->
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+    <!-- styles -->
+    <link rel="stylesheet" href="styles/sections.css">
+    <link rel="stylesheet" href="styles/utils.css">
+    <link rel="stylesheet" href="styles/fullcard.css">
+    <link rel="stylesheet" href="styles/icons.css">
+  </head>
+  <body>
+    <div ng-controller="MainController as controller">
+      <section> <!-- card edit -->
+        card edit section
+      </section>
+
+      <section class="flexContainer"> <!-- card list -->
+        card list section
+        <div class="card" ng-repeat="card in controller.data.cardList">
+          <!-- <base-card card="card"></base-card> -->
+          <div class="cardBorder">
+            <div class="cardBack" ng-style="{'background-color': card.mainColor}">
+              <div class="texture"></div>
+              <div class="topLeft">
+                <div class="evolutionStage">
+                  <div class="hasStage">
+                    <div class="stageHead">
+                      <span>stage</span><span class='stageNumber'>2</span>
+                    </div>
+                    <div class="stageImg">
+                      <img src="" alt="">
+                    </div>
+                    <div class="stageTextContainer"></div>
+                    <div class="stageText">evolves from <span class='evolvesFrom'>x</span></div>
+                  </div>
+                  <div class="basic">
+                    <div class="stageHead">
+                      <span class="">basic</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="title cardName"> {{card.name}} </div>
+              </div>
+              <div class="topRight">
+                <span class="subtitle">{{card.numberDesc}}</span><span class="title">{{card.numberValue}}</span>
+                <div class="icon">
+                  <div class="{{card.icon}}"></div>
+                </div>
+              </div>
+              <div class="imageHalf">
+                <img src="{{card.src}}" class="mainImg">
+              </div>
+              <div class="attackHalf">
+                <div ng-repeat="attack in card.attacks">
+                  <div class="attackName">{{attack.name}}</div>
+                  <div class="attackDescription">{{attack.description}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
