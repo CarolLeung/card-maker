@@ -1,0 +1,25 @@
+.baseCard .cardBorder {
+  background-color: #d4d4d4;
+}
+
+.baseCard .back {
+  flex-direction: column;
+}
+
+.baseCard .top {
+  flex: 0.8;
+}
+
+.baseCard .cardName {
+  flex: 1;
+}
+
+.baseCard .imageHalf {
+  flex: 4;
+  border: 2px solid #ffffffb8;
+}
+
+.baseCard .attackHalf {
+  flex: 5.2;
+  overflow: hidden;
+}

@@ -1,9 +1,18 @@
+.textInput {
+  filter: drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 0px white) drop-shadow(0px 0px 0px white) drop-shadow(0px 0px 0px white);
+  background: transparent;
+  border: unset;
+  padding: 0;
+  font-size: 16px;
+}
+
 /* name, level, hp */
 .title {
   font-weight: bold;
   position: relative;
   font-family: 'Oswald', sans-serif;
   text-transform: capitalize;
+  filter: drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 0px white) drop-shadow(0px 0px 0px white) drop-shadow(0px 0px 0px white);
 }
 
 /* level, hp descriptor */
@@ -14,10 +23,14 @@
   font-weight: bold;
   font-family: 'Oswald', sans-serif;
   z-index: 2;
+  filter: drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 0px white) drop-shadow(0px 0px 0px white) drop-shadow(0px 0px 0px white);
 }
 
-.cardName {
-  margin-left: 10px;
+.evolutionStage {
+  position: absolute;
+  left: -5px;
+  top: 7px;
+  display: none;
 }
 
 .stageHead {

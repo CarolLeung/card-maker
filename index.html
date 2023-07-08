@@ -19,21 +19,53 @@
     <link rel="stylesheet" href="styles/utils.css">
     <link rel="stylesheet" href="styles/fullcard.css">
     <link rel="stylesheet" href="styles/icons.css">
+    <link rel="stylesheet" href="styles/baseCard.css">
   </head>
   <body>
     <div ng-controller="MainController as controller">
-      <section> <!-- card edit -->
-        card edit section
+      <section class="flexContainer editSection"> <!-- card edit -->        
+        <form action="">
+          {{data.cardZoom}}
+          <input type="range" id="zoom" name="zoom" min="1" max="2" step="0.1" ng-model="data.cardZoom">
+          <input type="color" id="head" name="head" ng-model="data.currentCard.mainColor">
+        </form>
+        <div class="card baseCard">
+          <div class="cardBorder">
+            <div class="back" ng-style="{'background-color': data.currentCard.mainColor}">
+              <div class="top">
+                <div class="title cardName">{{data.currentCard.name}} </div>
+                <div class="subtitleIcon">
+                  <span class="subtitle">{{data.currentCard.numberDesc}}</span><span class="title">{{data.currentCard.numberValue}}</span>
+                  <div class="icon">
+                    <div class="{{data.currentCard.icon}}"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="imageHalf">
+                <!-- <img src="{{data.currentCard.src}}" class="mainImg"> -->
+              </div>
+              <div class="attackHalf">
+                <div ng-repeat="attack in data.currentCard.attacks">
+                  <div class="attackName">{{attack.name}}</div>
+                  <div class="attackDescription">{{attack.description}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="flexContainer"> <!-- card list -->
-        card list section
-        <div class="card" ng-repeat="card in controller.data.cardList">
+        <div
+          class="card baseCard"
+          ng-repeat="card in data.cardList"
+          ng-class="{selected : card == data.currentCard}"
+          ng-click="data.currentCard = card"
+        >
           <!-- <base-card card="card"></base-card> -->
           <div class="cardBorder">
-            <div class="cardBack" ng-style="{'background-color': card.mainColor}">
-              <div class="texture"></div>
-              <div class="topLeft">
+            <div class="back" ng-style="{'background-color': card.mainColor}">
+              <div class="top">
                 <div class="evolutionStage">
                   <div class="hasStage">
                     <div class="stageHead">
@@ -51,16 +83,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="title cardName"> {{card.name}} </div>
-              </div>
-              <div class="topRight">
-                <span class="subtitle">{{card.numberDesc}}</span><span class="title">{{card.numberValue}}</span>
-                <div class="icon">
-                  <div class="{{card.icon}}"></div>
+                <div class="title cardName">{{card.name}} </div>
+                <div class="subtitleIcon">
+                  <span class="subtitle">{{card.numberDesc}}</span><span class="title">{{card.numberValue}}</span>
+                  <div class="icon">
+                    <div class="{{card.icon}}"></div>
+                  </div>
                 </div>
               </div>
               <div class="imageHalf">
-                <img src="{{card.src}}" class="mainImg">
+                <!-- <img src="{{card.src}}" class="mainImg"> -->
               </div>
               <div class="attackHalf">
                 <div ng-repeat="attack in card.attacks">

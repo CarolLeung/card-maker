@@ -1,12 +1,18 @@
 (function(angular) {
   'use strict';
   angular.module('mainApp', [])
-  .controller('MainController', function() {
-    const controller = this;
-    controller.data = {
+  .controller('MainController', ['$scope', function($scope) {
+    $scope.cardZoom = 1;
+
+    $scope.data = {
       template: template,
       cardList: cardDataList,
+      currentCard: cardDataList[0],
     }
+    // $scope.$apply();
 
-  });
+    $scope.changeZoom = (zoom) => {
+      $scope.cardZoom = zoom;
+    }
+  }]);
 })(window.angular);
