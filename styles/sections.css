@@ -24,6 +24,7 @@ body {
 
 .card.selected {
   box-shadow: 0 0 0 2px red;
+  outline: 2px dotted purple;
   border-radius: 8px;
 }
 
@@ -58,6 +59,7 @@ body {
 
 .top {
   display: flex;
+  overflow: hidden;
 }
 
 .attackHalf {
@@ -74,4 +76,10 @@ body {
   font-size: 7px;
   padding: 10px;
   display: none;
+}
+
+.editCard {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }

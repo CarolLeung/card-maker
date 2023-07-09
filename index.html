@@ -24,14 +24,52 @@
   <body>
     <div ng-controller="MainController as controller">
       <section class="flexContainer editSection"> <!-- card edit -->        
-        <form action="">
-          {{data.cardZoom}}
-          <input type="range" id="zoom" name="zoom" min="1" max="2" step="0.1" ng-model="data.cardZoom">
-          <input type="color" id="head" name="head" ng-model="data.currentCard.mainColor">
+        <form action="" class="editCard">
+          <div>
+            {{data.cardZoom}}
+            <input type="range" id="zoom" name="zoom" min="1" max="2" step="0.1" ng-model="data.cardZoom">
+          </div>
+          <div>
+            <label for="background">Background</label>
+            <input type="color" id="background" name="background" ng-model="data.currentCard.mainColor">
+          </div>
+          <div>
+            <label for="cardName">Card Name</label>
+            <input type="text" id="cardName" name="cardName" size="10" ng-model="data.currentCard.name">
+          </div>
+
+          <div>
+            <label for="numberDesc">numberDesc</label>
+            <input type="text" id="numberDesc" name="numberDesc" size="10" ng-model="data.currentCard.numberDesc">
+          </div>
+          <div>
+            <label for="numberValue">numberValue</label>
+            <input type="text" id="numberValue" name="numberValue" size="10" ng-model="data.currentCard.numberValue">
+          </div>
+          <div>
+            <label for="icon">icon</label>
+            <input type="text" id="icon" name="icon" size="10" ng-model="data.currentCard.icon">
+          </div>
+
+          <div>
+            <div ng-repeat="(index, attack) in data.currentCard.attacks">
+              attack {{index+1}}
+              <div>
+                <label for="attackName{{index}}">Name</label>
+                <input type="text" id="attackName{{index}}" name="attackName{{index}}" size="10" ng-model="attack.name">
+              </div>
+              <div>
+                <label for="attackDescription{{index}}">Description</label>
+                <input type="text" id="attackDescription{{index}}" name="attackDescription{{index}}" size="10" ng-model="attack.description">
+              </div>
+            </div>
+          </div>
+
+          
         </form>
-        <div class="card baseCard">
+        <div class="card baseCard editCard">
           <div class="cardBorder">
-            <div class="back" ng-style="{'background-color': data.currentCard.mainColor}">
+            <div class="back" ng-style="{'background': data.currentCard.mainColor}">
               <div class="top">
                 <div class="title cardName">{{data.currentCard.name}} </div>
                 <div class="subtitleIcon">
@@ -64,7 +102,7 @@
         >
           <!-- <base-card card="card"></base-card> -->
           <div class="cardBorder">
-            <div class="back" ng-style="{'background-color': card.mainColor}">
+            <div class="back" ng-style="{'background': card.mainColor}">
               <div class="top">
                 <div class="evolutionStage">
                   <div class="hasStage">
