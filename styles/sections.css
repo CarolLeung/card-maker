@@ -18,11 +18,11 @@ body {
   flex: 50%;
 }
 
-.card {
+.cardContainer {
   margin: 11px 6px;
 }
 
-.card.selected {
+.cardContainer.selected {
   box-shadow: 0 0 0 2px red;
   outline: 2px dotted purple;
   border-radius: 8px;
@@ -59,11 +59,9 @@ body {
 
 .top {
   display: flex;
-  overflow: hidden;
 }
 
 .attackHalf {
-  filter: drop-shadow(0px 0px 1px white) drop-shadow(0px 0px 0px white) drop-shadow(0px 0px 0px white) drop-shadow(0px 0px 0px white);
   font-family: 'Patrick Hand', cursive;
 }
 

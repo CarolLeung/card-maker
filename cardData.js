@@ -1,33 +1,33 @@
-const template = {
-  "name": "card name",
-  "src": "",
-  "mainColor": "#7B62A3",
-  // "borderColor": "#FFE165",
-  "icon": "",
-  "full": false,
-  "mainImg": {
-    "height": "auto",
-    "width": 100,
-    "top": 0,
-    "left": 0
-  },
-  // "imageDesc": "image description",
-  "numberDesc": "hp",
-  "numberValue": "110",
-  // "stage": 2, // false or a number
-  // "evolvesFrom": "x",
-  "attacks": [
-    {
-      "name": "attack 1",
-      "description": "attack 1 description..."
-    },
-    {
-      "name": "attack 2",
-      "description": "attack 2 description..."
-    }
-  ]
-  // "mainDescription": "other descriptive text"
-}
+// const template = {
+//   "name": "card name",
+//   "src": "",
+//   "mainColor": "#7B62A3",
+//   // "borderColor": "#FFE165",
+//   "icon": "",
+//   "full": false,
+//   "mainImg": {
+//     "height": "auto",
+//     "width": 100,
+//     "top": 0,
+//     "left": 0
+//   },
+//   // "imageDesc": "image description",
+//   "numberDesc": "hp",
+//   "numberValue": "110",
+//   // "stage": 2, // false or a number
+//   // "evolvesFrom": "x",
+//   "attacks": [
+//     {
+//       "name": "attack 1",
+//       "description": "attack 1 description..."
+//     },
+//     {
+//       "name": "attack 2",
+//       "description": "attack 2 description..."
+//     }
+//   ]
+//   // "mainDescription": "other descriptive text"
+// }
 
 const cardDataList = [
   {
