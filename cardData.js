@@ -55,6 +55,36 @@ const cardDataList = [
         "description": "We saw the hidden gem of London."
       }
     ],
+    "body": [
+      {
+        type: "name",
+        text: "All Hail!",
+      },
+      {
+        type: "description",
+        text: "Praying to the ugly dutchess grants a",
+      },
+      {
+        type: "description",
+        text: "greater appreciation to the fine arts.",
+      },
+      {
+        type: "name",
+        text: "Not to scale",
+      },
+      {
+        type: "description",
+        text: "Paintings are smaller in real life.",
+      },
+      {
+        type: "name",
+        text: "Aren't you glad we hunted her down?",
+      },
+      {
+        type: "description",
+        text: "We saw the hidden gem of London.",
+      },
+    ],
     "full": false
   },
   {

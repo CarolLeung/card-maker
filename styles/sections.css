@@ -18,6 +18,10 @@ body {
   flex: 50%;
 }
 
+.cardListContainer {
+  border: 1px solid black;
+}
+
 .cardContainer {
   margin: 11px 6px;
 }
@@ -62,6 +66,10 @@ body {
 }
 
 .attackHalf {
+  font-family: 'Patrick Hand', cursive;
+}
+
+.body {
   font-family: 'Patrick Hand', cursive;
 }
 

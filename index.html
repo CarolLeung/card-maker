@@ -32,60 +32,182 @@
         <form class="editCard">
           <button class="btn btn-primary" ng-click="newCard()">Make New Card</button>
 
-          <div>
-            {{data.cardZoom}}
-            <input type="range" id="zoom" name="zoom" min="1" max="2" step="0.1" ng-model="data.cardZoom">
-          </div>
-          <div class="input-group mb-3">
-            <div class="form-floating">
-              <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                <option selected>Solid Color</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
-              <label for="floatingSelect">Background</label>
-            </div>
-            <input type="color" id="background" name="background" class="form-control form-control-color h-100" ng-model="data.currentCard.mainColor">
-          </div>
-          <div class="input-group mb-3">
-            <span class="input-group-text">Card Name</span>
-            <input type="text" class="form-control" size="10" ng-model="data.currentCard.name">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">numberDesc</span>
-            <input type="text" class="form-control" size="10" ng-model="data.currentCard.numberDesc">
-            <span class="input-group-text">numberValue</span>
-            <input type="text" class="form-control" size="10" ng-model="data.currentCard.numberValue">
-          </div>
-
-          <div class="input-group mb-3">
-            <span class="input-group-text">icon</span>
-            <input type="text" class="form-control" size="10" ng-model="data.currentCard.icon">
-          </div>
-
-
-          <div>
-            <div ng-repeat="(index, attack) in data.currentCard.attacks">
-              attack {{index+1}}
-              <button class="btn btn-danger btn-close" ng-click="removeAttack(index)"></button>
- 
-              <div class="input-group mb-3">
-                <span class="input-group-text">Name</span>
-                <input type="text" class="form-control" size="10" ng-model="attack.name">
-              </div>
-              <div class="form-floating">
-                <textarea class="form-control"  id="attackDescription{{index}}" ng-model="attack.description"></textarea>
-                <label for="attackDescription{{index}}">Description</label>
+          <div class="accordion" id="editCardData">
+            <!-- colors -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseColors" aria-expanded="true" aria-controls="collapseColors">
+                  Colors
+                </button>
+              </h2>
+              <div id="collapseColors" class="accordion-collapse collapse show" data-bs-parent="#editCardData">
+                <div class="accordion-body">
+                  <div class="input-group mb-3">
+                    <div class="form-floating">
+                      <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        <option selected>Solid</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                      <label for="floatingSelect">Background</label>
+                    </div>
+                    <input type="color" id="background" name="background" class="form-control form-control-color" ng-model="data.currentCard.mainColor">
+                  </div>
+                </div>
               </div>
             </div>
-            <button class="btn btn-secondary" ng-click="addAttack()">Add Attack</button>
+
+            <!-- top of card -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHeading" aria-expanded="false" aria-controls="collapseHeading">
+                  Heading
+                </button>
+              </h2>
+              <div id="collapseHeading" class="accordion-collapse collapse" data-bs-parent="#editCardData">
+                <div class="accordion-body">
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">Card Name</span>
+                    <input type="text" class="form-control" size="10" ng-model="data.currentCard.name">
+                  </div>
+        
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">numberDesc</span>
+                    <input type="text" class="form-control" size="10" ng-model="data.currentCard.numberDesc">
+                    <span class="input-group-text">numberValue</span>
+                    <input type="text" class="form-control" size="10" ng-model="data.currentCard.numberValue">
+                  </div>
+        
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">icon</span>
+                    <input type="text" class="form-control" size="10" ng-model="data.currentCard.icon">
+                  </div>
+        
+                </div>
+              </div>
+            </div>
+
+            <!-- image -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseImage" aria-expanded="false" aria-controls="collapseImage">
+                  Image
+                </button>
+              </h2>
+              <div id="collapseImage" class="accordion-collapse collapse" data-bs-parent="#editCardData">
+                <div class="accordion-body">
+                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+              </div>
+            </div>
+
+            <!-- body of card -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBody" aria-expanded="false" aria-controls="collapseBody">
+                  Body Text
+                </button>
+              </h2>
+              <div id="collapseBody" class="accordion-collapse collapse" data-bs-parent="#editCardData">
+                <div class="accordion-body">
+                  <div ng-repeat="(index, attack) in data.currentCard.attacks">
+                    attack {{index+1}}
+                    <button class="btn btn-danger btn-close" ng-click="removeAttack(index)"></button>
+       
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">Name</span>
+                      <input type="text" class="form-control" size="10" ng-model="attack.name">
+                    </div>
+                    <div class="form-floating">
+                      <textarea class="form-control"  id="attackDescription{{index}}" ng-model="attack.description"></textarea>
+                      <label for="attackDescription{{index}}">Description</label>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary" ng-click="addAttack()">Add Attack</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- footer of card -->
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFooter" aria-expanded="false" aria-controls="collapseFooter">
+                  Footer
+                </button>
+              </h2>
+              <div id="collapseFooter" class="accordion-collapse collapse" data-bs-parent="#editCardData">
+                <div class="accordion-body">
+                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+              </div>
+            </div>
           </div>
 
           
         </form>
-        <div class="cardContainer baseCard editCard" style="transform: scale(2); transform-origin: top left;">
+        <div class="baseCard" style="flex: 1;">
+          <!--  style="background-color: pink; width: 100%; height: 100%;" -->
+          <svg width="214" height="313" viewbox="0 0 214 313">
+            <defs>
+              <linearGradient id="Gradient1">
+                <stop offset="0%" stop-color="blue" />
+                <stop offset="100%" stop-color="red" />
+              </linearGradient>
+              <linearGradient id="Gradient2">
+                <stop offset="0%" stop-color="red" />
+                <stop offset="100%" stop-color="blue" />
+              </linearGradient>
+            </defs>
+
+            <rect class="background"
+              ng-style="{
+                fill: data.currentCard.mainColor,
+                stroke: 'url(#Gradient1)',
+              }"
+            />
+
+            <g class="heading" transform="translate(20 15)">
+              <g>
+                <text text-anchor="start" y="14" class="title glow">{{data.currentCard.name}}</text>
+              </g>
+              <g transform="translate(174 0)">
+                <text text-anchor="end" x="-4" y="14" class="glow">
+                  <tspan class="subtitle" dx="4">{{data.currentCard.numberDesc}}</tspan>
+                  <tspan class="title" dx="-4">{{data.currentCard.numberValue}}</tspan>
+                </text>
+              </g>
+            </g>
+            <g class="image" transform="translate(20 35.5)">
+              <rect width="174" height="117" stroke="black" fill="transparent" stroke-width="2"/>
+            </g>
+
+            <g class="body glow" transform="translate(20 168)">
+              <text ng-repeat="(index, attack) in data.currentCard.body" ng-attr-transform="translate(0 {{index * 20}})">
+                <tspan 
+                  ng-if="attack.type === 'name'"
+                  class="attackName"
+                >
+                  {{attack.text}}
+                </tspan>
+
+                <tspan 
+                  ng-if="attack.type === 'description'"
+                  class="attackDescription"
+                  ng-attr-dy="{{data.currentCard.body[index-1].type === 'description' && -10 || -4}}"
+                >
+                  {{attack.text}}
+                </tspan>
+                  
+              </text>
+            </g>
+            
+
+          </svg>
+        </div>
+
+
+        <div class="cardContainer baseCard editCard" style="margin: 0;">
           <div class="cardBorder">
             <div class="back" ng-style="{'background': data.currentCard.mainColor}">
               <div class="top">
@@ -115,7 +237,7 @@
         </div>
       </section>
 
-      <section class="flexContainer"> <!-- card list -->
+      <section class="flexContainer cardListContainer"> <!-- card list -->
         <div
           class="cardContainer baseCard"
           ng-repeat="card in data.cardList"
