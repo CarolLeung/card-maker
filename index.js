@@ -7,6 +7,7 @@
     $scope.data = {
       cardList: cardDataList,
       currentCard: cardDataList[0],
+      color: cardDataList[0].colors.background.linearGradient,
     }
 
     $scope.newCard = () => {
@@ -36,10 +37,13 @@
           background: {
             type: "solid", // one of solid, transparent, linear gradient, radical gradient, image
             value: "#7B62A3",
+            solid: "#7B62A3",
+            linearGradient: [{value: "#555"}],
+            radicalGradient: [{value: "#aaa"}],
           },
           border: {
             type: "solid", // one of solid, transparent, linear gradient, radical gradient, image
-            value: "#7B62A3",
+            value: "#646464",
           },
           texture: {
             value: "snow",
@@ -73,16 +77,24 @@
       $scope.data.currentCard = cardTemplate;
     }
 
-    // attacks
-    $scope.addAttack = () => {
-      const attackTemplate = {
-        name: "",
-        description: ""
-      };
-      $scope.data.currentCard.attacks.push(attackTemplate);
+    // colors
+    $scope.addColor = (object) => {
+      object.push({value: "#000"});
     }
-    $scope.removeAttack = (index) => {
-      $scope.data.currentCard.attacks.splice(index, 1);
+    $scope.removeColor = (object, index) => {
+      object.splice(index, 1);
+    }
+
+    // card body text
+    $scope.addRow = () => {
+      const rowTemplate = {
+        type: "name",
+        text: ""
+      };
+      $scope.data.currentCard.body.attacks.push(rowTemplate);
+    }
+    $scope.removeRow = (index) => {
+      $scope.data.currentCard.body.attacks.splice(index, 1);
     }
   }]);
 })(window.angular);

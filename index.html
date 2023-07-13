@@ -28,7 +28,138 @@
   </head>
   <body>
     <div ng-controller="MainController as controller">
-      <section class="flexContainer editSection"> <!-- card edit -->
+      {{data.currentCard.colors}}
+      <div class="input-group">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelect" ng-model="data.currentCard.colors.background.type">
+            <option value="solid">Solid</option>
+            <option value="linearGradient">Linear Gradient</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <label for="floatingSelect">Background</label>
+        </div>
+        <div class="form-control">
+          <div ng-if="data.currentCard.colors.background.type === 'solid'">
+            <input type="color" class="form-control form-control-color w-100" ng-model="data.currentCard.colors.background.solid">
+          </div>
+          <div ng-if="data.currentCard.colors.background.type === 'linearGradient'">
+            <div ng-repeat="gradientColor in data.color">
+              <input type="color" class="form-control form-control-color" ng-model="data.color[$index].value">
+              <button class="btn btn-danger btn-close" ng-click="removeColor(data.color, index)"></button>
+            </div>
+            <button ng-click="addColor(data.color)">Add Color</button> 
+          </div>
+
+        </div>
+      </div>
+      
+      <section class="editSection"> <!-- flexContainer card edit -->
+
+        <!-- svg card -->
+        <div class="baseCard" style="flex: 1;">
+          <!--  style="background-color: pink; width: 100%; height: 100%;" -->
+          <svg width="217" height="313" viewbox="0 0 217 313">
+            <defs>
+              <linearGradient id="Gradient1">
+                <stop offset="0%" stop-color="blue" />
+                <stop offset="100%" stop-color="red" />
+              </linearGradient>
+              <linearGradient id="Gradient2">
+                <stop offset="0%" stop-color="red" />
+                <stop offset="100%" stop-color="blue" />
+              </linearGradient>
+
+              <linearGradient id="GradientTest">
+                <stop ng-repeat="gradientColor in data.color" offset="{{$index * (100 / (data.color.length - 1))}}%" stop-color="{{gradientColor.value}}" />
+              </linearGradient>
+            </defs>
+
+            <rect class="background"
+              stroke-width=10
+              width=206
+              height=303
+              x=5
+              y=5
+              rx=10
+              ry=10
+              ng-style="{
+                fill: 'url(#GradientTest)',
+                stroke: data.currentCard.colors.border.value,
+              }"
+            />
+
+            <g class="heading" transform="translate(20 15)">
+              <g>
+                <text text-anchor="start" y="14" class="title glow">{{data.currentCard.name}}</text>
+              </g>
+              <g transform="translate(174 0)">
+                <text text-anchor="end" x="-4" y="14" class="glow">
+                  <tspan class="subtitle" dx="4">{{data.currentCard.numberDesc}}</tspan>
+                  <tspan class="title" dx="-4">{{data.currentCard.numberValue}}</tspan>
+                </text>
+              </g>
+            </g>
+            <g class="image" transform="translate(20 35.5)">
+              <rect width="174" height="117" stroke="black" fill="transparent" stroke-width="2"/>
+            </g>
+
+            <g class="body glow" transform="translate(20 168)">
+              <text ng-repeat="(index, attack) in data.currentCard.body.attacks" ng-attr-transform="translate(0 {{index * 20}})">
+                <tspan 
+                  ng-if="attack.type === 'name'"
+                  class="attackName"
+                >
+                  {{attack.text}}
+                </tspan>
+
+                <!-- TODO: redo this sizing, add size info to body data? -->
+
+                <tspan 
+                  ng-if="attack.type === 'description'"
+                  class="attackDescription"
+                  ng-attr-dy="{{data.currentCard.body.attacks[index-1].type === 'description' && -10 || -4}}"
+                >
+                  {{attack.text}}
+                </tspan>
+                  
+              </text>
+            </g>
+
+          </svg>
+        </div>
+
+        <!-- old card -->
+        <div class="cardContainer baseCard editCard" style="margin: 0;">
+          <div class="cardBorder">
+            <div class="back" ng-style="{'background': data.currentCard.mainColor}">
+              <div class="top">
+                <div class="title cardName glow">{{data.currentCard.name}} </div>
+                <div class="subtitleIcon">
+                  <span class="glow">
+                    <span class="subtitle">{{data.currentCard.numberDesc}}</span>
+                    <span class="title">{{data.currentCard.numberValue}}</span>
+                  </span>
+                  
+                  <div class="icon">
+                    <div class="{{data.currentCard.icon}}"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="imageHalf">
+                <!-- <img src="{{data.currentCard.src}}" class="mainImg"> -->
+              </div>
+              <div class="attackHalf glow">
+                <div ng-repeat="attack in data.currentCard.attacks">
+                  <div class="attackName">{{attack.name}}</div>
+                  <div class="attackDescription">{{attack.description}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- form -->
         <form class="editCard">
           <button class="btn btn-primary" ng-click="newCard()">Make New Card</button>
 
@@ -111,20 +242,20 @@
               </h2>
               <div id="collapseBody" class="accordion-collapse collapse" data-bs-parent="#editCardData">
                 <div class="accordion-body">
-                  <div ng-repeat="(index, attack) in data.currentCard.attacks">
-                    attack {{index+1}}
-                    <button class="btn btn-danger btn-close" ng-click="removeAttack(index)"></button>
-       
-                    <div class="input-group mb-3">
-                      <span class="input-group-text">Name</span>
-                      <input type="text" class="form-control" size="10" ng-model="attack.name">
-                    </div>
-                    <div class="form-floating">
-                      <textarea class="form-control"  id="attackDescription{{index}}" ng-model="attack.description"></textarea>
-                      <label for="attackDescription{{index}}">Description</label>
+                  <div ng-repeat="(index, row) in data.currentCard.body.attacks">
+                    <div class="input-group">
+                      <div class="form-floating">
+                        <select class="form-select rounded-0" id="floatingSelect{{index}}" ng-model="row.type">
+                          <option value="name" selected>Name</option>
+                          <option value="description">Description</option>
+                        </select>
+                        <label for="floatingSelect{{index}}">Row {{index+1}}</label>
+                      </div>
+                      <input type="text" class="form-control" ng-model="row.text">
+                      <button class="btn btn-danger btn-close" ng-click="removeRow(index)"></button>
                     </div>
                   </div>
-                  <button class="btn btn-secondary" ng-click="addAttack()">Add Attack</button>
+                  <button class="btn btn-primary mt-2" ng-click="addRow()">Add Row</button>
                 </div>
               </div>
             </div>
@@ -146,95 +277,10 @@
 
           
         </form>
-        <div class="baseCard" style="flex: 1;">
-          <!--  style="background-color: pink; width: 100%; height: 100%;" -->
-          <svg width="214" height="313" viewbox="0 0 214 313">
-            <defs>
-              <linearGradient id="Gradient1">
-                <stop offset="0%" stop-color="blue" />
-                <stop offset="100%" stop-color="red" />
-              </linearGradient>
-              <linearGradient id="Gradient2">
-                <stop offset="0%" stop-color="red" />
-                <stop offset="100%" stop-color="blue" />
-              </linearGradient>
-            </defs>
-
-            <rect class="background"
-              ng-style="{
-                fill: data.currentCard.mainColor,
-                stroke: 'url(#Gradient1)',
-              }"
-            />
-
-            <g class="heading" transform="translate(20 15)">
-              <g>
-                <text text-anchor="start" y="14" class="title glow">{{data.currentCard.name}}</text>
-              </g>
-              <g transform="translate(174 0)">
-                <text text-anchor="end" x="-4" y="14" class="glow">
-                  <tspan class="subtitle" dx="4">{{data.currentCard.numberDesc}}</tspan>
-                  <tspan class="title" dx="-4">{{data.currentCard.numberValue}}</tspan>
-                </text>
-              </g>
-            </g>
-            <g class="image" transform="translate(20 35.5)">
-              <rect width="174" height="117" stroke="black" fill="transparent" stroke-width="2"/>
-            </g>
-
-            <g class="body glow" transform="translate(20 168)">
-              <text ng-repeat="(index, attack) in data.currentCard.body" ng-attr-transform="translate(0 {{index * 20}})">
-                <tspan 
-                  ng-if="attack.type === 'name'"
-                  class="attackName"
-                >
-                  {{attack.text}}
-                </tspan>
-
-                <tspan 
-                  ng-if="attack.type === 'description'"
-                  class="attackDescription"
-                  ng-attr-dy="{{data.currentCard.body[index-1].type === 'description' && -10 || -4}}"
-                >
-                  {{attack.text}}
-                </tspan>
-                  
-              </text>
-            </g>
-            
-
-          </svg>
-        </div>
 
 
-        <div class="cardContainer baseCard editCard" style="margin: 0;">
-          <div class="cardBorder">
-            <div class="back" ng-style="{'background': data.currentCard.mainColor}">
-              <div class="top">
-                <div class="title cardName glow">{{data.currentCard.name}} </div>
-                <div class="subtitleIcon">
-                  <span class="glow">
-                    <span class="subtitle">{{data.currentCard.numberDesc}}</span>
-                    <span class="title">{{data.currentCard.numberValue}}</span>
-                  </span>
-                  
-                  <div class="icon">
-                    <div class="{{data.currentCard.icon}}"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="imageHalf">
-                <!-- <img src="{{data.currentCard.src}}" class="mainImg"> -->
-              </div>
-              <div class="attackHalf glow">
-                <div ng-repeat="attack in data.currentCard.attacks">
-                  <div class="attackName">{{attack.name}}</div>
-                  <div class="attackDescription">{{attack.description}}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
+
       </section>
 
       <section class="flexContainer cardListContainer"> <!-- card list -->

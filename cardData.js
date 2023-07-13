@@ -1,34 +1,3 @@
-// const template = {
-//   "name": "card name",
-//   "src": "",
-//   "mainColor": "#7B62A3",
-//   // "borderColor": "#FFE165",
-//   "icon": "",
-//   "full": false,
-//   "mainImg": {
-//     "height": "auto",
-//     "width": 100,
-//     "top": 0,
-//     "left": 0
-//   },
-//   // "imageDesc": "image description",
-//   "numberDesc": "hp",
-//   "numberValue": "110",
-//   // "stage": 2, // false or a number
-//   // "evolvesFrom": "x",
-//   "attacks": [
-//     {
-//       "name": "attack 1",
-//       "description": "attack 1 description..."
-//     },
-//     {
-//       "name": "attack 2",
-//       "description": "attack 2 description..."
-//     }
-//   ]
-//   // "mainDescription": "other descriptive text"
-// }
-
 const cardDataList = [
   {
     "name": "Patron Saint",
@@ -55,36 +24,56 @@ const cardDataList = [
         "description": "We saw the hidden gem of London."
       }
     ],
-    "body": [
-      {
-        type: "name",
-        text: "All Hail!",
+    colors: {
+      background: {
+        type: "linearGradient", // one of solid, transparent, linear gradient, radical gradient, image
+        solid: "#7B62A3",
+        linearGradient: [
+          {value: "#7B62A3"},
+          {value: "#8f6161"}
+        ],
+        radicalGradient: ["#7B62A3"],
       },
-      {
-        type: "description",
-        text: "Praying to the ugly dutchess grants a",
+      border: {
+        type: "solid", // one of solid, transparent, linear gradient, radical gradient, image
+        value: "#646464",
       },
-      {
-        type: "description",
-        text: "greater appreciation to the fine arts.",
-      },
-      {
-        type: "name",
-        text: "Not to scale",
-      },
-      {
-        type: "description",
-        text: "Paintings are smaller in real life.",
-      },
-      {
-        type: "name",
-        text: "Aren't you glad we hunted her down?",
-      },
-      {
-        type: "description",
-        text: "We saw the hidden gem of London.",
-      },
-    ],
+      texture: {
+        value: "snow",
+      }
+    },
+    "body": {
+      attacks: [
+        {
+          type: "name",
+          text: "All Hail!",
+        },
+        {
+          type: "description",
+          text: "Praying to the ugly dutchess grants a",
+        },
+        {
+          type: "description",
+          text: "greater appreciation to the fine arts.",
+        },
+        {
+          type: "name",
+          text: "Not to scale",
+        },
+        {
+          type: "description",
+          text: "Paintings are smaller in real life.",
+        },
+        {
+          type: "name",
+          text: "Aren't you glad we hunted her down?",
+        },
+        {
+          type: "description",
+          text: "We saw the hidden gem of London.",
+        },
+      ],
+    },
     "full": false
   },
   {
