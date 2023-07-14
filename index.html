@@ -34,12 +34,13 @@
           <select class="form-select" ng-model="colorLayer.type" ng-disabled="!$index">
             <option value="solid">Solid</option>
             <option value="linearGradient">Linear Gradient</option>
-            <option value="2">Two</option>
+            <option value="radicalGradient">Radical Gradient</option>
             <option value="3">Three</option>
           </select>
           <label>Type</label>
         </div>
-        <div class="form-control" ng-if="colorLayer.type === 'linearGradient'">
+
+        <div class="form-control" ng-if="colorLayer.type === 'linearGradient' || colorLayer.type === 'radicalGradient'">
           <div class="btn-group mb-1" role="group" aria-label="Toggle displaying guideline">
             <input type="checkbox" class="btn-check" id="showGuide{{$index}}" ng-model="colorLayer.direction.showGuide">
             <label class="btn btn-outline-primary" for="showGuide{{$index}}">
@@ -62,12 +63,27 @@
             <span class="input-group-text">y</span>
             <input type="range" class="form-control form-range h-auto p-2 bg-primary-subtle" min="0" max="100" ng-model="colorLayer.direction.end.y">
           </div>
+          <!-- radical specific -->
+          <div ng-if="colorLayer.type === 'radicalGradient'">
+            <!-- radius -->
+            <div class="input-group">
+              <span class="input-group-text">Radius</span>
+              <input type="range" class="form-control form-range h-auto p-2 bg-primary-subtle" min="0" max="100" ng-model="colorLayer.direction.radius">
+            </div>
+            <select class="form-select" aria-label="Spread Method" ng-model="colorLayer.direction.spread">
+              <option value="">pad</option>
+              <option value="reflect">reflect</option>
+              <option value="repeat">repeat</option>
+            </select>
+          </div>
         </div>
+
         <div class="form-control">
           <div ng-if="colorLayer.type === 'solid'">
             <input type="color" class="form-control form-control-color w-100" ng-model="colorLayer.value[0].color">
           </div>
-          <div ng-if="colorLayer.type === 'linearGradient'">
+
+          <div ng-if="colorLayer.type === 'linearGradient' || colorLayer.type === 'radicalGradient'">
             <div ng-repeat="(gradIndex, gradientColor) in colorLayer.value">
               <div class="input-group">
                 <input type="color" class="form-control form-control-color" ng-model="colorLayer.value[gradIndex].color">
@@ -77,6 +93,7 @@
             </div>
             <button class="btn btn-primary mt-1" ng-click="addColorGradient(colorLayer.value)">Add Color in Gradient</button>
           </div>
+
         </div>
         <button ng-if="$index" class="btn btn-danger btn-close" ng-click="removeItem(data.color.background, $index)"></button>
       </div>
@@ -109,6 +126,7 @@
                   ng-attr-fill={{colorLayer.value[0].color}}
                 />
               </g>
+
               <g ng-if="colorLayer.type === 'linearGradient'">
                 <defs>
                   <linearGradient
@@ -125,6 +143,34 @@
                       ng-attr-stop-opacity="{{gradientColor.opacity}}%"
                     />
                   </linearGradient>
+                </defs>
+                <rect class="background"
+                  stroke-width=10
+                  width=196
+                  height=293
+                  x=10 y=10 rx=5 ry=5
+                  ng-attr-fill='url(#GradientBackground{{colorIndex}})'
+                />
+              </g>
+
+              <g ng-if="colorLayer.type === 'radicalGradient'">
+                <defs>
+                  <radialGradient
+                    id="GradientBackground{{colorIndex}}"
+                    ng-attr-fx="{{colorLayer.direction.start.x}}%"
+                    ng-attr-fy="{{colorLayer.direction.start.y}}%"
+                    ng-attr-cx="{{colorLayer.direction.end.x}}%"
+                    ng-attr-cy="{{colorLayer.direction.end.y}}%"
+                    ng-attr-r="{{colorLayer.direction.radius}}%"
+                    spreadMethod="{{colorLayer.direction.spread}}" 
+                  > <!-- NOTE: ng-attr-spreadMethod doesn't work -->
+                    <stop
+                      ng-repeat="gradientColor in colorLayer.value"
+                      ng-attr-offset="{{$index * (100 / (colorLayer.value.length - 1))}}%"
+                      ng-attr-stop-color="{{gradientColor.color}}"
+                      ng-attr-stop-opacity="{{gradientColor.opacity}}%"
+                    />
+                  </radialGradient>
                 </defs>
                 <rect class="background"
                   stroke-width=10
@@ -176,37 +222,26 @@
 
             <!-- guidelines -->
             <g ng-repeat="(colorIndex, colorLayer) in data.color.background">
-              <g ng-if="colorLayer.type === 'linearGradient' && colorLayer.direction.showGuide">
+              <g ng-if="(colorLayer.type === 'linearGradient' || colorLayer.type === 'radicalGradient') && colorLayer.direction.showGuide">
                 <line
-                  ng-attr-x1= "{{colorLayer.direction.start.x}}%"
-                  ng-attr-y1="{{colorLayer.direction.start.y}}%"
-                  ng-attr-x2="{{colorLayer.direction.end.x}}%"
-                  ng-attr-y2="{{colorLayer.direction.end.y}}%"
-                  stroke="#cfe2ff"
-                  stroke-width="7"
+                  ng-attr-x1="{{colorLayer.direction.start.x}}%" ng-attr-y1="{{colorLayer.direction.start.y}}%"
+                  ng-attr-x2="{{colorLayer.direction.end.x}}%" ng-attr-y2="{{colorLayer.direction.end.y}}%"
+                  stroke="#cfe2ff" stroke-width="7"
                 />
                 <circle ng-attr-cx="{{colorLayer.direction.start.x}}%" ng-attr-cy="{{colorLayer.direction.start.y}}%" r="7" fill="#cfe2ff" />
                 <circle ng-attr-cx="{{colorLayer.direction.end.x}}%" ng-attr-cy="{{colorLayer.direction.end.y}}%" r="7" fill="#cfe2ff" />
                 <line
-                  ng-attr-x1="{{colorLayer.direction.start.x + 0.001}}%"
-                  ng-attr-y1="{{colorLayer.direction.start.y + 0.001}}%"
-                  ng-attr-x2="{{colorLayer.direction.end.x}}%"
-                  ng-attr-y2="{{colorLayer.direction.end.y}}%"
-                  ng-attr-stroke=url(#GradientBackground{{colorIndex}})
-                  stroke-width="5"
-                  stroke-linecap="round"
+                  ng-attr-x1="{{colorLayer.direction.start.x + 0.001}}%" ng-attr-y1="{{colorLayer.direction.start.y + 0.001}}%"
+                  ng-attr-x2="{{colorLayer.direction.end.x}}%" ng-attr-y2="{{colorLayer.direction.end.y}}%"
+                  ng-attr-stroke=url(#GradientBackground{{colorIndex}}) stroke-width="5" stroke-linecap="round"
                 />
                 <circle 
-                  ng-attr-cx="{{colorLayer.direction.start.x}}%"
-                  ng-attr-cy="{{colorLayer.direction.start.y}}%"
-                  r="6"
-                  ng-attr-fill="{{colorLayer.value[0].color}}"
+                  ng-attr-cx="{{colorLayer.direction.start.x}}%" ng-attr-cy="{{colorLayer.direction.start.y}}%"
+                  r="6" ng-attr-fill="{{colorLayer.value[0].color}}"
                 />
                 <circle 
-                  ng-attr-cx="{{colorLayer.direction.end.x}}%"
-                  ng-attr-cy="{{colorLayer.direction.end.y}}%"
-                  r="6"
-                  ng-attr-fill="{{colorLayer.value[colorLayer.value.length-1].color}}"
+                  ng-attr-cx="{{colorLayer.direction.end.x}}%" ng-attr-cy="{{colorLayer.direction.end.y}}%"
+                  r="6" ng-attr-fill="{{colorLayer.value[colorLayer.value.length-1].color}}"
                 />
               </g>
             </g>
