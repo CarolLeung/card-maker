@@ -36,7 +36,7 @@
         colors: {
           background: [
             {
-              type: 'solid', // one of solid, transparent, linear gradient, radical gradient, image
+              type: 'solid', // one of solid, transparent, linear gradient, radial gradient, image
               value: '#7B62A3'
             },
             {
@@ -53,7 +53,7 @@
             }
           ],
           border: {
-            type: "solid", // one of solid, transparent, linear gradient, radical gradient, image
+            type: "solid", // one of solid, transparent, linear gradient, radial gradient, image
             value: "#646464",
           },
           texture: {

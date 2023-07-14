@@ -34,13 +34,13 @@
           <select class="form-select" ng-model="colorLayer.type" ng-disabled="!$index">
             <option value="solid">Solid</option>
             <option value="linearGradient">Linear Gradient</option>
-            <option value="radicalGradient">Radical Gradient</option>
+            <option value="radialGradient">Radial Gradient</option>
             <option value="3">Three</option>
           </select>
           <label>Type</label>
         </div>
 
-        <div class="form-control" ng-if="colorLayer.type === 'linearGradient' || colorLayer.type === 'radicalGradient'">
+        <div class="form-control" ng-if="colorLayer.type === 'linearGradient' || colorLayer.type === 'radialGradient'">
           <div class="btn-group mb-1" role="group" aria-label="Toggle displaying guideline">
             <input type="checkbox" class="btn-check" id="showGuide{{$index}}" ng-model="colorLayer.direction.showGuide">
             <label class="btn btn-outline-primary" for="showGuide{{$index}}">
@@ -63,8 +63,8 @@
             <span class="input-group-text">y</span>
             <input type="range" class="form-control form-range h-auto p-2 bg-primary-subtle" min="0" max="100" ng-model="colorLayer.direction.end.y">
           </div>
-          <!-- radical specific -->
-          <div ng-if="colorLayer.type === 'radicalGradient'">
+          <!-- radial specific -->
+          <div ng-if="colorLayer.type === 'radialGradient'">
             <!-- radius -->
             <div class="input-group">
               <span class="input-group-text">Radius</span>
@@ -83,7 +83,7 @@
             <input type="color" class="form-control form-control-color w-100" ng-model="colorLayer.value[0].color">
           </div>
 
-          <div ng-if="colorLayer.type === 'linearGradient' || colorLayer.type === 'radicalGradient'">
+          <div ng-if="colorLayer.type === 'linearGradient' || colorLayer.type === 'radialGradient'">
             <div ng-repeat="(gradIndex, gradientColor) in colorLayer.value">
               <div class="input-group">
                 <input type="color" class="form-control form-control-color" ng-model="colorLayer.value[gradIndex].color">
@@ -153,7 +153,7 @@
                 />
               </g>
 
-              <g ng-if="colorLayer.type === 'radicalGradient'">
+              <g ng-if="colorLayer.type === 'radialGradient'">
                 <defs>
                   <radialGradient
                     id="GradientBackground{{colorIndex}}"
@@ -222,7 +222,7 @@
 
             <!-- guidelines -->
             <g ng-repeat="(colorIndex, colorLayer) in data.color.background">
-              <g ng-if="(colorLayer.type === 'linearGradient' || colorLayer.type === 'radicalGradient') && colorLayer.direction.showGuide">
+              <g ng-if="(colorLayer.type === 'linearGradient' || colorLayer.type === 'radialGradient') && colorLayer.direction.showGuide">
                 <line
                   ng-attr-x1="{{colorLayer.direction.start.x}}%" ng-attr-y1="{{colorLayer.direction.start.y}}%"
                   ng-attr-x2="{{colorLayer.direction.end.x}}%" ng-attr-y2="{{colorLayer.direction.end.y}}%"
