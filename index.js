@@ -7,7 +7,7 @@
     $scope.data = {
       cardList: cardDataList,
       currentCard: cardDataList[0],
-      color: cardDataList[0].colors.background.linearGradient,
+      color: cardDataList[0].colors,
     }
 
     $scope.newCard = () => {
@@ -34,13 +34,24 @@
 
         layout: "",
         colors: {
-          background: {
-            type: "solid", // one of solid, transparent, linear gradient, radical gradient, image
-            value: "#7B62A3",
-            solid: "#7B62A3",
-            linearGradient: [{value: "#555"}],
-            radicalGradient: [{value: "#aaa"}],
-          },
+          background: [
+            {
+              type: 'solid', // one of solid, transparent, linear gradient, radical gradient, image
+              value: '#7B62A3'
+            },
+            {
+              type: 'linearGradient',
+              value: [
+                {color: "#7B00A3", opacity: 50},
+                {color: "#8f6161", opacity: 100}
+              ],
+              direction: {
+                showGuide: true,
+                start: { x: 0, y: 0 },
+                end: { x: 1, y: 1 },
+              }
+            }
+          ],
           border: {
             type: "solid", // one of solid, transparent, linear gradient, radical gradient, image
             value: "#646464",
@@ -78,11 +89,20 @@
     }
 
     // colors
-    $scope.addColor = (object) => {
-      object.push({value: "#000"});
+    $scope.addColorLayer = (object) => {
+      console.log(object)
+      object.push({
+        type: "solid",
+        value: [{color: '#000'}],
+        direction: {
+          showGuide: true,
+          start: { x: 0, y: 50 },
+          end: { x: 100, y: 50 },
+        }
+      });
     }
-    $scope.removeColor = (object, index) => {
-      object.splice(index, 1);
+    $scope.addColorGradient = (object) => {
+      object.push({color: "#000", opacity: 100});
     }
 
     // card body text
@@ -95,6 +115,12 @@
     }
     $scope.removeRow = (index) => {
       $scope.data.currentCard.body.attacks.splice(index, 1);
+    }
+
+
+    $scope.removeItem = (object, index) => {
+      console.log(object, index);
+      object.splice(index, 1);
     }
   }]);
 })(window.angular);

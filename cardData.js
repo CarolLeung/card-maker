@@ -25,15 +25,24 @@ const cardDataList = [
       }
     ],
     colors: {
-      background: {
-        type: "linearGradient", // one of solid, transparent, linear gradient, radical gradient, image
-        solid: "#7B62A3",
-        linearGradient: [
-          {value: "#7B62A3"},
-          {value: "#8f6161"}
-        ],
-        radicalGradient: ["#7B62A3"],
-      },
+      background: [
+        {
+          type: 'solid',
+          value: [{color: '#ffffff'}]
+        },
+        {
+          type: 'linearGradient',
+          value: [
+            {color: "#7B00A3", opacity: 50},
+            {color: "#8f6161", opacity: 50}
+          ],
+          direction: {
+            showGuide: true,
+            start: { x: 0, y: 50 },
+            end: { x: 100, y: 50 },
+          }
+        }
+      ],
       border: {
         type: "solid", // one of solid, transparent, linear gradient, radical gradient, image
         value: "#646464",
