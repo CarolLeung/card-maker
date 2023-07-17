@@ -31,7 +31,7 @@ const cardDataList = [
           value: [{color: '#ffffff'}]
         },
         {
-          type: 'radialGradient',
+          type: 'linearGradient',
           value: [
             {color: "#7B00A3", opacity: 50},
             {color: "#8f6161", opacity: 50}
