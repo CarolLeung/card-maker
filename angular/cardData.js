@@ -51,7 +51,7 @@ const cardDataList = [
         value: "snow",
       }
     },
-    "body": {
+    body: {
       attacks: [
         {
           type: "name",
