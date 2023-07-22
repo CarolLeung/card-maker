@@ -10,8 +10,8 @@ export const defaultCard: CardData = {
     {
       type: 'linearGradient',
       value: [
-        {color: "#7B00A3", opacity: 50},
-        {color: "#8f6161", opacity: 50}
+        {color: "#7B00A3", opacity: 5},
+        {color: "#8f6161", opacity: 5}
       ],
       showGuide: true,
       startX: 0,

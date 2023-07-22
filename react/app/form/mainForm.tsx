@@ -25,7 +25,7 @@ export default function MainForm(
       <Accordion.Item eventKey="0">
         <Accordion.Header>Colors</Accordion.Header>
         <Accordion.Body>
-          <ColorSection props={data.background} setCardData={setCardData} />
+          <ColorSection propKey={"background"} setCardData={setCardData} />
 
         </Accordion.Body>
       </Accordion.Item>

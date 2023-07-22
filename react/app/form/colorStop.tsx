@@ -1,9 +1,10 @@
-import { Dispatch, SetStateAction, useContext } from 'react';
+import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { CardContext } from '../defaultCard';
 
-export default function ColorStop({props, layerIndex, colorIndex, showOpacity, setCardData} : {props: backgroundStops, layerIndex: number, colorIndex: number, showOpacity: boolean, setCardData: Dispatch<SetStateAction<CardData>>})  {
+export default function ColorStop({props, layerIndex, colorIndex, showOpacity, deletable, setCardData} : {props: backgroundStops, layerIndex: number, colorIndex: number, showOpacity: boolean, deletable: boolean, setCardData: Dispatch<SetStateAction<CardData>>})  {
   const data = useContext(CardContext);
+  const [waitForUpdate, setWait] = useState(false);
 
   return <>
     <Form.Control type="color" value={props.color} onChange={e => {
@@ -11,12 +12,19 @@ export default function ColorStop({props, layerIndex, colorIndex, showOpacity, s
         ...data.background[layerIndex].value[colorIndex],
         color: e.target.value
       }
-      setCardData({
-        ...data
-      });
+      // add delay to update color input so it doesn't lag
+      if (!waitForUpdate) {
+        setWait(true);
+        setTimeout(() => {
+          setCardData({
+            ...data
+          });
+          setWait(false);
+        }, 100);
+      }
     } }/>
     {
-      showOpacity && <Form.Range className="form-control h-auto p-2 bg-primary-subtle" min="0" max="100" value={props.opacity} onChange={e => {
+      showOpacity && <Form.Range className="form-control h-auto p-2 bg-primary-subtle" min="0" max="10" value={props.opacity !== undefined? props.opacity : 5} onChange={e => {
         data.background[layerIndex].value[colorIndex] = {
           ...data.background[layerIndex].value[colorIndex],
           opacity: Number(e.target.value)
@@ -27,6 +35,11 @@ export default function ColorStop({props, layerIndex, colorIndex, showOpacity, s
       } }/>
     }
     {/* delete button */}
-    { !!layerIndex && <Button ng-if="$index" variant="danger" className="btn-close" ng-click="removeItem(data.color.background, $index)"></Button>}
+    { deletable && <Button variant="danger" className="btn-close" disabled={!colorIndex} onClick={() => {
+      data.background[layerIndex].value.splice(colorIndex, 1);
+      setCardData({
+        ...data,
+      });
+    }}></Button>}
   </>
 }

@@ -5,22 +5,24 @@ interface CardData {
 }
 
 interface border {
-  type?: "solid" // one of solid, transparent, linear gradient, radial gradient, image
+  type?: backgroundType
   value: string
 }
 
 interface background {
-  type?: string // backgroundType
+  type: backgroundType
   value: Array<backgroundStops>
   showGuide?: boolean
   startX?: number
   startY?: number
   endX?: number
   endY?: number
-  spread?: "pad" | "reflect" | "repeat"
+  spread?: radialSpread
+  radius?: number
 }
 
-type backgroundType = "solid" | "linearGradient" | "radicalGradient";
+type backgroundType = "solid" | "linearGradient" | "radialGradient" | "image" | "texture";
+type radialSpread = "pad" | "reflect" | "repeat";
 
 interface backgroundStops {
   color: string
