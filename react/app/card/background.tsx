@@ -1,4 +1,12 @@
-export default function Background({props: layers, index} : {props: Array<background>, index: number})  {
+export default function Background({props: layers, propKey, index} : {props: Array<background>, propKey: colorKey, index: number})  {
+  const boxSizing = {
+    height: 313,
+    width: 216,
+    borderThickness: 10,
+    outerRadius: 10,
+    innerRadius: 5,
+  }
+
   return <>
     {layers.map((layer, i) => (
       <g key={`background-${i}`}>
@@ -45,16 +53,17 @@ export default function Background({props: layers, index} : {props: Array<backgr
           </defs> 
         }
         {
-          layer.type === "image" || layer.type === "texture"
+          layer.type === "image"
           ? <image 
-            href="https://www.transparenttextures.com/patterns/fresh-snow.png"
-            height={293}
-            x={10} y={10} />
+            href={layer.value[0].url ||"https://www.transparenttextures.com/patterns/fresh-snow.png"}
+            height={boxSizing.height - (propKey !== 'border'? boxSizing.borderThickness * 2 : 0)}
+            x={propKey !== 'border' ? boxSizing.borderThickness : 0} y={propKey !== 'border' ? boxSizing.borderThickness : 0}
+            mask="url(#borderMask)"/>
           : <rect
             className="background"
-            width={196}
-            height={293}
-            x={10} y={10} rx={5} ry={5}
+            width={boxSizing.width - (propKey !== 'border'? boxSizing.borderThickness * 2 : 0)}
+            height={boxSizing.height - (propKey !== 'border'? boxSizing.borderThickness * 2 : 0)}
+            x={propKey !== 'border' ? boxSizing.borderThickness : 0} y={propKey !== 'border' ? boxSizing.borderThickness : 0} rx={propKey !== 'border' ? boxSizing.innerRadius : boxSizing.outerRadius} ry={propKey !== 'border' ? boxSizing.innerRadius : boxSizing.outerRadius}
             fill={layer.type === "solid" && layer.value[0].color || `url(#GradientBackground-${index}-${i})`}
           />
         }

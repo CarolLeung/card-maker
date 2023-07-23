@@ -1,7 +1,12 @@
 import { createContext } from 'react';
 
 export const defaultCard: CardData = {
-  border: {value: '#ffec9d'},
+  border: [
+    {
+      type: 'solid',
+      value: [{color: '#ffec9d'}]
+    },
+  ],
   background: [
     {
       type: 'solid',

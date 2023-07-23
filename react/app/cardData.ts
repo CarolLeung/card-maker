@@ -1,13 +1,10 @@
 interface CardData {
-  border: border
+  border: Array<background>
   background: Array<background>
   attacks?: Array<attack>
 }
 
-interface border {
-  type?: backgroundType
-  value: string
-}
+type colorKey = "background" | "border";
 
 interface background {
   type: backgroundType
@@ -20,13 +17,15 @@ interface background {
   spread?: radialSpread
   radius?: number
 }
+type backgroundProperty = "showGuide" | "startX" | "startY" | "endX" | "endY" | "spread" | "radius";
 
-type backgroundType = "solid" | "linearGradient" | "radialGradient" | "image" | "texture";
+type backgroundType = "solid" | "linearGradient" | "radialGradient" | "image";
 type radialSpread = "pad" | "reflect" | "repeat";
 
 interface backgroundStops {
   color: string
   opacity?: number
+  url?: string
 }
 
 interface attack {
