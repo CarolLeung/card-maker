@@ -1,11 +1,11 @@
 "use client";
-import { Dispatch, SetStateAction, useContext } from 'react';
+import { useContext } from 'react';
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
-import { CardContext } from "../defaultCard";
+import { CardContext } from "../defaults";
 import ColorLayerData from './colorLayerData';
 import ColorLayerGuides from './colorLayerGuides';
 
-export default function ColorLayer({propKey, index, setCardData} : {propKey: colorKey, index: number, setCardData: Dispatch<SetStateAction<CardData>>})  {
+export default function ColorLayer({propKey, index, setCardData} : {propKey: colorKey, index: number, setCardData: (data: CardData) => void})  {
   const data = useContext(CardContext);
   const layer = data[propKey][index];
 
@@ -19,9 +19,7 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
               ...data[propKey][index],
               type: e.target.value as backgroundType
             }
-            setCardData({
-              ...data
-            });
+            setCardData(data);
           }} >
             {!index && <option value="solid">Solid</option>}
             <option value="linearGradient">Linear Gradient</option>
@@ -35,14 +33,12 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
         <ColorLayerGuides propKey={propKey} index={index} setCardData={setCardData} ></ColorLayerGuides>
       </Col> }
       <Col className='p-2'>
-        <ColorLayerData props={layer} propKey={propKey} index={index} setCardData={setCardData} ></ColorLayerData>
+        <ColorLayerData propKey={propKey} index={index} setCardData={setCardData} ></ColorLayerData>
       </Col>
       {/* delete button */}
       <Button variant="danger" className="btn-close" disabled={!index} onClick={() => {
         data[propKey].splice(index, 1);
-        setCardData({
-          ...data,
-        });
+        setCardData(data);
       }}></Button>
     </Row>
   </Container>

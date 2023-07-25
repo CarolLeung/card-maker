@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, useContext } from 'react';
+import { useContext } from 'react';
 import ColorLayer from './colorLayer';
 import { Button } from 'react-bootstrap';
-import { CardContext } from "../defaultCard";
+import { CardContext } from "../defaults";
 
-export default function ColorSection({propKey, setCardData} : {propKey: colorKey, setCardData: Dispatch<SetStateAction<CardData>>})  {
+export default function ColorSection({propKey, setCardData} : {propKey: colorKey, setCardData: (data: CardData) => void})  {
   const data = useContext(CardContext);
   const layers = data[propKey];
 
@@ -17,9 +17,7 @@ export default function ColorSection({propKey, setCardData} : {propKey: colorKey
         type: 'linearGradient',
         value: [{color: '#eeeeee'}]
       })
-      setCardData({
-        ...data,
-      });
+      setCardData(data);
     } }>Add Layer</Button>
   </>
 }

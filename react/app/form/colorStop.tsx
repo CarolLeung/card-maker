@@ -1,10 +1,11 @@
-import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { CardContext } from '../defaultCard';
+import { CardContext } from '../defaults';
 
-export default function ColorStop({props, propKey, layerIndex, colorIndex, showOpacity, deletable, setCardData} : {propKey: colorKey, props: backgroundStops, layerIndex: number, colorIndex: number, showOpacity: boolean, deletable: boolean, setCardData: Dispatch<SetStateAction<CardData>>})  {
+export default function ColorStop({propKey, layerIndex, colorIndex, showOpacity, deletable, setCardData} : {propKey: colorKey, layerIndex: number, colorIndex: number, showOpacity: boolean, deletable: boolean, setCardData: (data: CardData) => void})  {
   const data = useContext(CardContext);
   const [waitForUpdate, setWait] = useState(false);
+  const props = data[propKey][layerIndex].value[colorIndex];
 
   return <>
     <Form.Control type="color" value={props.color} onChange={e => {
@@ -16,9 +17,7 @@ export default function ColorStop({props, propKey, layerIndex, colorIndex, showO
       if (!waitForUpdate) {
         setWait(true);
         setTimeout(() => {
-          setCardData({
-            ...data
-          });
+          setCardData(data);
           setWait(false);
         }, 100);
       }
@@ -29,17 +28,13 @@ export default function ColorStop({props, propKey, layerIndex, colorIndex, showO
           ...data[propKey][layerIndex].value[colorIndex],
           opacity: Number(e.target.value)
         }
-        setCardData({
-          ...data
-        });
+        setCardData(data);
       } }/>
     }
     {/* delete button */}
     { deletable && <Button variant="danger" className="btn-close" disabled={!colorIndex} onClick={() => {
       data[propKey][layerIndex].value.splice(colorIndex, 1);
-      setCardData({
-        ...data,
-      });
+      setCardData(data);
     }}></Button>}
   </>
 }

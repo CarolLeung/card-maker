@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import CardSvg from "./card/cardSvg";
 import MainForm from "./form/mainForm";
-import { defaultCard, CardContext } from "./defaultCard";
+import { defaultCard, CardContext } from "./defaults";
 
 import Button from 'react-bootstrap/Button';
 
@@ -42,10 +42,16 @@ export default function Document() {
 
 function EditCard({cardData, index}: {cardData: CardData, index: number}) {
   const [, setData] = useState(cardData);
+  function setCardData(data : CardData) {
+    setData({
+      ...data,
+    });
+  }
+
   return (
     <>
       <CardContext.Provider value={cardData}>
-        <MainForm setCardData={setData} />
+        <MainForm setCardData={setCardData} />
       </CardContext.Provider>
       
       <CardSvg index={index} data={cardData}  />

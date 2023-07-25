@@ -1,13 +1,21 @@
 "use client";
-import { Dispatch, SetStateAction, useContext } from 'react';
+import { useContext } from 'react';
 import { Form, InputGroup } from "react-bootstrap";
-import { CardContext } from "../defaultCard";
+import { CardContext, defaultValues } from "../defaults";
 
-export default function ColorLayerGuides({propKey, index, setCardData} : {propKey: colorKey, index: number, setCardData: Dispatch<SetStateAction<CardData>>})  {
+export default function ColorLayerGuides({propKey, index, setCardData} : {propKey: colorKey, index: number, setCardData: (data: CardData) => void})  {
   const data = useContext(CardContext);
   const layer = data[propKey][index];
 
-  function handleChange(property: backgroundProperty, value : string) {
+  function createRange(key : backgroundProperty) {
+    return <>
+      <InputGroup.Text>{key}</InputGroup.Text>
+      <Form.Range className="form-control h-auto p-2 bg-primary-subtle" min={defaultValues[key].min} max={defaultValues[key].max} value={layer[key] !== undefined? layer[key] : defaultValues[key].default} onChange={(e) => {handleChange(key, e.target.value)}}/>
+      {layer[key]}
+    </>
+  }
+
+  function handleChange(property: backgroundProperty | 'showGuide' | 'spread', value : string) {
     switch (property) {
       case 'spread':
         data[propKey][index].spread = value as radialSpread;
@@ -19,7 +27,7 @@ export default function ColorLayerGuides({propKey, index, setCardData} : {propKe
         data[propKey][index][property] = Number(value);
         break;
     }
-    setCardData({...data});
+    setCardData(data);
   }
 
   return <InputGroup>
@@ -32,31 +40,25 @@ export default function ColorLayerGuides({propKey, index, setCardData} : {propKe
     />
     {/* start point */}
     <InputGroup>
-      <InputGroup.Text>x</InputGroup.Text>
-      <Form.Range className="form-control h-auto p-2 bg-primary-subtle" min="0" max="99" value={layer.startX !== undefined? layer.startX : 0} onChange={(e) => {handleChange('startX', e.target.value)}}
-      />
-      <InputGroup.Text>y</InputGroup.Text>
-      <Form.Range className="form-control h-auto p-2 bg-primary-subtle" min="1" max="100" value={layer.startY !== undefined? layer.startY : 0} onChange={(e) => {handleChange('startY', e.target.value)}}/>
+      {createRange('startX')}
+      {createRange('startY')}
     </InputGroup>
     {/* end point */}
     <InputGroup>
-      <InputGroup.Text>x</InputGroup.Text>
-      <Form.Range className="form-control h-auto p-2 bg-primary-subtle" min="0" max="99" value={layer.endX !== undefined? layer.endX : 100} onChange={(e) => {handleChange('endX', e.target.value)}}/>
-      <InputGroup.Text>y</InputGroup.Text>
-      <Form.Range className="form-control h-auto p-2 bg-primary-subtle" min="1" max="100" value={layer.endY !== undefined? layer.endY : 0} onChange={(e) => {handleChange('endY', e.target.value)}}/>
+      {createRange('endX')}
+      {createRange('endY')}
     </InputGroup>
     {/* radial specific */}
     { layer.type === "radialGradient" && <>
       {/* radius */}
       <InputGroup>
-        <InputGroup.Text>Radius</InputGroup.Text>
-        <Form.Range className="form-control h-auto p-2 bg-primary-subtle" min="1" max="100" value={layer.radius !== undefined? layer.radius : 50} onChange={(e) => {handleChange('radius', e.target.value)}}/>
+        {createRange('radius')}
       </InputGroup>
       {/* spread */}
       <Form.Select value={layer.spread} onChange={(e) => {handleChange('spread', e.target.value)}}>
-        <option value="pad">pad</option>
-        <option value="reflect">reflect</option>
-        <option value="repeat">repeat</option>
+        <option value="pad">Normal</option>
+        <option value="repeat">Repeating</option>
+        <option value="reflect">Mirrored Repeating</option>
       </Form.Select>
     </>}
   </InputGroup>  

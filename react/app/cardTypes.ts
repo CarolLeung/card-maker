@@ -1,3 +1,11 @@
+interface cardLayoutParams {
+  height: number,
+  width: number,
+  borderThickness?: number,
+  outerRadius?: number,
+  innerRadius?: number,
+}
+
 interface CardData {
   border: Array<background>
   background: Array<background>
@@ -17,7 +25,21 @@ interface background {
   spread?: radialSpread
   radius?: number
 }
-type backgroundProperty = "showGuide" | "startX" | "startY" | "endX" | "endY" | "spread" | "radius";
+
+type backgroundProperty = "startX" | "startY" | "endX" | "endY" | "radius";
+interface backgroundPropertyDefault {
+  startX: backgroundPropertyDefaultFields
+  startY: backgroundPropertyDefaultFields
+  endX: backgroundPropertyDefaultFields
+  endY: backgroundPropertyDefaultFields
+  radius: backgroundPropertyDefaultFields
+}
+
+interface backgroundPropertyDefaultFields {
+  max: number
+  min: number
+  default: number
+}
 
 type backgroundType = "solid" | "linearGradient" | "radialGradient" | "image";
 type radialSpread = "pad" | "reflect" | "repeat";

@@ -1,12 +1,7 @@
-import { Dispatch, SetStateAction, useContext } from "react";
 import { Accordion, Form } from "react-bootstrap";
 import ColorSection from "./colorSection";
-import { CardContext } from "../defaultCard";
 
-export default function MainForm(
-  {setCardData} : {setCardData: Dispatch<SetStateAction<CardData>>}
-  ) {
-  const data = useContext(CardContext);
+export default function MainForm({setCardData} : {setCardData: (data: CardData) => void}) {
 
   return <Form action="">
     <Accordion defaultActiveKey="0">

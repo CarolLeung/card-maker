@@ -28,3 +28,31 @@ export const defaultCard: CardData = {
 }
 
 export const CardContext = createContext(defaultCard);
+
+export const defaultValues: backgroundPropertyDefault = {
+  startX: {
+    max: 99,
+    min: 0,
+    default: 0,
+  },
+  startY: {
+    max: 99,
+    min: 0,
+    default: 0,
+  },
+  endX: {
+    max: 100,
+    min: 1,
+    default: 100,
+  },
+  endY: {
+    max: 100,
+    min: 1,
+    default: 0,
+  },
+  radius: {
+    max: 100,
+    min: 1,
+    default: 50,
+  },
+};
