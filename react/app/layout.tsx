@@ -1,5 +1,6 @@
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/form.scss';
 
 export default function RootLayout({
   children,

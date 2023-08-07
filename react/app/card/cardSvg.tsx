@@ -7,7 +7,7 @@ export default function CardSvg({index, data} : {index: number, data: CardData})
     <mask id="borderMask">
       <rect width={196} height={293} x={10} y={10} rx={5} ry={5} fill="white" /> 
     </mask>
-    <Background props={data.border} propKey={'border'} index={index}></Background>
-    <Background props={data.background} propKey={'background'} index={index}></Background>
+    <Background key={'border'} props={data.border} propKey={'border'} index={index}></Background>
+    <Background key={'background'} props={data.background} propKey={'background'} index={index}></Background>
   </svg>
 }

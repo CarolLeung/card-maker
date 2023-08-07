@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { basic } from "../cardLayouts";
 
 export default function Background({props: layers, propKey, index} : {props: Array<background>, propKey: colorKey, index: number})  {
@@ -16,12 +17,23 @@ export default function Background({props: layers, propKey, index} : {props: Arr
               y2={`${layer.endY || 0}%`}
             >
               {layer.value.map((gradientColor, colorIndex)=>(
-                <stop
-                  key={`stop-${colorIndex}`}
-                  offset={`${(layer.value.length > 1) ? colorIndex * (100 / (layer.value.length - 1)) : 0}%`}
-                  stopColor={gradientColor.color}
-                  stopOpacity={`${gradientColor.opacity !== undefined? gradientColor.opacity * 10 : 50}%`}
-                />
+                <Fragment key={`stop-${colorIndex}`}>
+                  <stop
+                    key={`stop-${colorIndex}`}
+                    offset={`${(layer.value.length > 1) ? colorIndex * (100 / (layer.value.length - (layer.stripes? 0 : 1))) : 0}%`}
+                    stopColor={gradientColor.color}
+                    stopOpacity={`${gradientColor.opacity !== undefined? gradientColor.opacity * 10 : 50}%`}
+                  />
+                  {
+                    layer.stripes &&
+                    <stop
+                      key={`stop-${colorIndex}-end`}
+                      offset={`${(layer.value.length > 1) ? (colorIndex + 1) * (100 / (layer.value.length)) : 0}%`}
+                      stopColor={gradientColor.color}
+                      stopOpacity={`${gradientColor.opacity !== undefined? gradientColor.opacity * 10 : 50}%`}
+                    />
+                  }
+                </ Fragment>
               ))}
             </linearGradient>
           </defs> 
@@ -38,12 +50,23 @@ export default function Background({props: layers, propKey, index} : {props: Arr
               spreadMethod={layer.spread || 'pad'}
             >
               {layer.value.map((gradientColor, colorIndex)=>(
-                <stop
-                  key={`stop-${colorIndex}`}
-                  offset={`${(layer.value.length > 1) ? colorIndex * (100 / (layer.value.length - 1)) : 0}%`}
-                  stopColor={gradientColor.color}
-                  stopOpacity={`${gradientColor.opacity !== undefined? gradientColor.opacity * 10 : 50}%`}
-                />
+                <Fragment key={`stop-${colorIndex}`}>
+                  <stop
+                    key={`stop-${colorIndex}`}
+                    offset={`${(layer.value.length > 1) ? colorIndex * (100 / (layer.value.length - (layer.stripes? 0 : 1))) : 0}%`}
+                    stopColor={gradientColor.color}
+                    stopOpacity={`${gradientColor.opacity !== undefined? gradientColor.opacity * 10 : 50}%`}
+                  />
+                  {
+                    layer.stripes &&
+                    <stop
+                      key={`stop-${colorIndex}-end`}
+                      offset={`${(layer.value.length > 1) ? (colorIndex + 1) * (100 / (layer.value.length)) : 0}%`}
+                      stopColor={gradientColor.color}
+                      stopOpacity={`${gradientColor.opacity !== undefined? gradientColor.opacity * 10 : 50}%`}
+                    />
+                  }
+                </ Fragment>
               ))}
             </radialGradient>
           </defs> 

@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Form, InputGroup } from "react-bootstrap";
 import { CardContext, defaultValues } from "../defaults";
 
-export default function ColorLayerGuides({propKey, index, setCardData} : {propKey: colorKey, index: number, setCardData: (data: CardData) => void})  {
+export default function ColorLayerGuides({propKey, index, setCardData, hideXY} : {propKey: colorKey, index: number, setCardData: (data: CardData) => void, hideXY?: boolean})  {
   const data = useContext(CardContext);
   const layer = data[propKey][index];
 
@@ -31,35 +31,42 @@ export default function ColorLayerGuides({propKey, index, setCardData} : {propKe
   }
 
   return <InputGroup>
-    {/* show guideline */}
-    <Form.Check
-      type="checkbox"
-      checked={!!layer.showGuide}
-      label={'Show Guideline'}
-      onChange={() => {handleChange('showGuide', '')}}
-    />
-    {/* start point */}
-    <InputGroup>
-      {createRange('startX')}
-      {createRange('startY')}
-    </InputGroup>
-    {/* end point */}
-    <InputGroup>
-      {createRange('endX')}
-      {createRange('endY')}
-    </InputGroup>
+    {
+      !hideXY && <>
+        {/* show guideline */}
+        <Form.Check
+          type="checkbox"
+          checked={!!layer.showGuide}
+          label={'Show Guideline'}
+          onChange={() => {handleChange('showGuide', '')}}
+        />
+        {/* start point */}
+        <InputGroup>
+          {createRange('startX')}
+          {createRange('startY')}
+        </InputGroup>
+        {/* end point */}
+        <InputGroup>
+          {createRange('endX')}
+          {createRange('endY')}
+        </InputGroup>
+      </>
+    }
+
     {/* radial specific */}
-    { layer.type === "radialGradient" && <>
-      {/* radius */}
-      <InputGroup>
-        {createRange('radius')}
-      </InputGroup>
-      {/* spread */}
-      <Form.Select value={layer.spread} onChange={(e) => {handleChange('spread', e.target.value)}}>
-        <option value="pad">Normal</option>
-        <option value="repeat">Repeating</option>
-        <option value="reflect">Mirrored Repeating</option>
-      </Form.Select>
-    </>}
+    {
+      layer.type === 'radialGradient' && <>
+        {/* radius */}
+        <InputGroup>
+          {createRange('radius')}
+        </InputGroup>
+        {/* spread */}
+        <Form.Select value={layer.spread} onChange={(e) => {handleChange('spread', e.target.value)}}>
+          <option value="pad">Normal</option>
+          <option value="repeat">Repeating</option>
+          <option value="reflect">Mirrored Repeating</option>
+        </Form.Select>
+      </>
+    }
   </InputGroup>  
 }

@@ -24,6 +24,7 @@ interface background {
   endY?: number
   spread?: radialSpread
   radius?: number
+  stripes?: boolean
 }
 
 type backgroundProperty = "startX" | "startY" | "endX" | "endY" | "radius";

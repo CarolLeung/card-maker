@@ -25,7 +25,16 @@ export default function ColorLayerData({propKey, index, setCardData} : {propKey:
       </InputGroup >}
     { (layer.type === "linearGradient" || layer.type === "radialGradient") &&
       <Form.Group>
-        {layer.value.map((stopColor, stopIndex)=> (
+        <Form.Check
+          type="checkbox"
+          checked={!!layer.stripes}
+          label={'Stripes'}
+          onChange={() => {
+            data[propKey][index].stripes = !data[propKey][index].stripes;
+            setCardData(data);
+          }}
+        />
+        {layer.value.map((_, stopIndex)=> (
           <InputGroup key={`stop-color-${stopIndex}`}>
             <ColorStop propKey={propKey} layerIndex={index} colorIndex={stopIndex} showOpacity={true} deletable={true} setCardData={setCardData} />
           </InputGroup >

@@ -1,0 +1,14 @@
+.test {
+  & > div {
+    border: 1px solid red;
+  }
+  div:first-child {
+    height: fit-content;
+  }
+}
+
+.solid {
+  .form-control-color {
+    height: calc(3.5em + calc(var(--bs-border-width) * 2));
+  }
+}

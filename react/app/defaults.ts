@@ -23,11 +23,25 @@ export const defaultCard: CardData = {
       startY: 50,
       endX: 100,
       endY: 50,
+      radius: 100,
     }
   ]
 }
 
 export const CardContext = createContext(defaultCard);
+
+export const defaultBackground: background = {
+  type: 'linearGradient',
+  value: [
+    {color: "#ffffff", opacity: 5},
+  ],
+  showGuide: true,
+  startX: 0,
+  startY: 50,
+  endX: 100,
+  endY: 50,
+  radius: 100,
+}
 
 export const defaultValues: backgroundPropertyDefault = {
   startX: {
