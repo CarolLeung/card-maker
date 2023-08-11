@@ -41,6 +41,8 @@ export const defaultBackground: background = {
   endX: 100,
   endY: 50,
   radius: 100,
+  directionPreset: '0-1-0',
+  radialPreset: '1-1'
 }
 
 export const defaultValues: backgroundPropertyDefault = {

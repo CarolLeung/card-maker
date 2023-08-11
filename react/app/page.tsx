@@ -6,6 +6,7 @@ import MainForm from "./form/mainForm";
 import { defaultCard, CardContext } from "./defaults";
 
 import Button from 'react-bootstrap/Button';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function Document() {
   const [cardList, setCardList] = useState(()=> {return [JSON.parse(JSON.stringify(defaultCard))]});
@@ -50,11 +51,19 @@ function EditCard({cardData, index}: {cardData: CardData, index: number}) {
 
   return (
     <>
-      <CardContext.Provider value={cardData}>
-        <MainForm setCardData={setCardData} />
-      </CardContext.Provider>
+      <Container>
+        <Row>
+          <Col sm={8}>
+            <CardContext.Provider value={cardData}>
+              <MainForm setCardData={setCardData} />
+            </CardContext.Provider>
+          </Col>
+          <Col>
+            <CardSvg index={index} data={cardData}  />
+          </Col>
+        </Row>
+      </Container>
       
-      <CardSvg index={index} data={cardData}  />
       {JSON.stringify(cardData)}
     </>
   )

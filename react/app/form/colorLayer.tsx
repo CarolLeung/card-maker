@@ -8,12 +8,11 @@ import ColorLayerGuides from './colorLayerGuides';
 export default function ColorLayer({propKey, index, setCardData} : {propKey: colorKey, index: number, setCardData: (data: CardData) => void})  {
   const data = useContext(CardContext);
   const layer = data[propKey][index];
-  const [colorDirection, setColorDirection] = useState('left-right');
-  const [radialLocation, setRadialLocation] = useState('location1');
 
   function setDirection(value: string) {
     const location = value.split('-');
     if (layer.type === 'linearGradient') {
+      data[propKey][index].directionPreset = value;
       if (value !== 'custom') {
         data[propKey][index] = {
           ...data[propKey][index],
@@ -23,7 +22,6 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
           endY: 100 * Number(location[2]),
         }
       }
-      setColorDirection(value);
     } else {
       data[propKey][index] = {
         ...data[propKey][index],
@@ -31,8 +29,8 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
         startY: 50 * Number(location[1]),
         endX: 50 * Number(location[0]),
         endY: 50 * Number(location[1]),
+        radialPreset: value
       }
-      setRadialLocation(value);
     }
     setCardData(data);
   }
@@ -47,7 +45,6 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
               ...data[propKey][index],
               type: e.target.value as backgroundType
             }
-            setRadialLocation('');
             setCardData(data);
           }} >
             {!index && <option value="solid">Solid</option>}
@@ -60,7 +57,7 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
       </Col>
       { layer.type === 'linearGradient' && <Col sm={4} className='p-2'>
         <Form.Floating>
-          <Form.Select value={colorDirection} onChange={e => setDirection(e.target.value)} >
+          <Form.Select value={layer.directionPreset} onChange={e => setDirection(e.target.value)} >
             <option value="0-1-0">Left to Right</option>
             <option value="0-0-1">Top to Bottom</option>
             <option value="0-1-1">Top Left Corner to Bottom Right Corner</option>
@@ -69,13 +66,13 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
           </Form.Select>
           <Form.Label>Direction</Form.Label>
         </Form.Floating>
-        {colorDirection === 'custom' && 
+        {layer.directionPreset === 'custom' && 
           <ColorLayerGuides propKey={propKey} index={index} setCardData={setCardData}></ColorLayerGuides>
         }
       </Col> }
       { layer.type === 'radialGradient' && <Col sm={4} className='p-2'>
         <Form.Floating>
-          <Form.Select value={colorDirection} onChange={e => setColorDirection(e.target.value)} >
+          <Form.Select value={layer.directionPreset} onChange={e => setDirection(e.target.value)} >
             <option value="">Select Start Point</option>
             <option value="custom">Custom</option>
           </Form.Select>
@@ -87,13 +84,13 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
               {Array.from({ length: 3 }).map((_, indexCol) => (
                 <ToggleButton
                   key={indexCol}
-                  id={`radialLocation${3 * indexRow +  (indexCol + 1)}`}
+                  id={`radialLocation${3 * indexRow +  (indexCol + 1)}-layer${index}`}
                   type="radio"
                   variant="outline-primary"
-                  name="radio"
+                  name={`layer-${index}`}
                   value={`${indexRow}-${indexCol}`}
-                  checked={radialLocation === `${indexRow}-${indexCol}`}
-                  onChange={(e) => setDirection(e.target.value)}
+                  checked={layer.radialPreset === `${indexRow}-${indexCol}`}
+                  onChange={e => setDirection(e.target.value)}
                   >
                   {3 * indexRow +  (indexCol + 1)}
                 </ToggleButton>
@@ -101,7 +98,7 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
             </Row>
           ))}
         </ToggleButtonGroup>
-        <ColorLayerGuides propKey={propKey} index={index} setCardData={setCardData} hideXY={colorDirection !== 'custom'} ></ColorLayerGuides>
+        <ColorLayerGuides propKey={propKey} index={index} setCardData={setCardData} hideXY={layer.directionPreset !== 'custom'} ></ColorLayerGuides>
       </Col> }
       <Col className='p-2'>
         <ColorLayerData propKey={propKey} index={index} setCardData={setCardData} ></ColorLayerData>

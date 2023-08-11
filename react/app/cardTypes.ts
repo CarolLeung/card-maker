@@ -22,6 +22,8 @@ interface background {
   startY?: number
   endX?: number
   endY?: number
+  directionPreset?: string
+  radialPreset?: string
   spread?: radialSpread
   radius?: number
   stripes?: boolean
