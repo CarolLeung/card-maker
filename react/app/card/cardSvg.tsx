@@ -1,7 +1,8 @@
 import Background from "./background";
 
 export default function CardSvg({index, data} : {index: number, data: CardData}) {
-  return <svg width="216" height="313" viewBox="0 0 216 313" 
+  return <svg width="216" height="313" viewBox="0 0 216 313" id="svg"
+    version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
   style={{
     width: '100%', height: '100%',
   }}
