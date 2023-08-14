@@ -1,9 +1,52 @@
-.test {
+$layerBorder: 1px solid red;
+$layerBorderRadius: 10px;
+
+.colorLayer {
   & > div {
-    border: 1px solid red;
+    border: $layerBorder;
+    &.colorType {
+      border-right: 0;
+      border-bottom-left-radius: $layerBorderRadius;
+      height: fit-content;
+    }
+    &:not(.colorType) {
+      border-bottom: 0;
+      border-right: 0;
+    }
+    &:nth-last-child(2) {
+      border-right: $layerBorder;
+    }
   }
-  div:first-child {
-    height: fit-content;
+
+  &.solid > div:first-child {
+    border-radius: 0;
+    border-bottom: 0;
+  }
+
+  & > button {
+    border: $layerBorder;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.colorLayers {
+  &:first-child {
+    .colorLayer > .colorType {
+      border-top-left-radius: $layerBorderRadius;
+    }
+  }
+  &:nth-last-child(2) {
+    .colorLayer > div {
+      border-bottom: $layerBorder;
+      &:nth-last-child(2) {
+        border-bottom-right-radius: $layerBorderRadius;
+      }
+      &:nth-last-child(3) {
+        border-bottom-left-radius: $layerBorderRadius;
+      }
+    }
   }
 }
 

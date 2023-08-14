@@ -35,9 +35,9 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
     setCardData(data);
   }
 
-  return <Container>
-    <Row className={`test ${layer.type} p-0`}>
-      <Col sm={3} className='p-2'>
+  return <Container className='colorLayers'>
+    <Row className={`colorLayer ${layer.type} p-0`}>
+      <Col sm={2} className='colorType p-2'>
         {/* select type */}
         <Form.Floating>
           <Form.Select value={layer.type} disabled={!index} onChange={e => {
@@ -55,7 +55,7 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
           <Form.Label>Type</Form.Label>
         </Form.Floating>
       </Col>
-      { layer.type === 'linearGradient' && <Col sm={4} className='p-2'>
+      { layer.type === 'linearGradient' && <Col sm={5} className='p-2'>
         <Form.Floating>
           <Form.Select value={layer.directionPreset} onChange={e => setDirection(e.target.value)} >
             <option value="0-1-0">Left to Right</option>
@@ -70,7 +70,7 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
           <ColorLayerGuides propKey={propKey} index={index} setCardData={setCardData}></ColorLayerGuides>
         }
       </Col> }
-      { layer.type === 'radialGradient' && <Col sm={4} className='p-2'>
+      { layer.type === 'radialGradient' && <Col sm={5} className='p-2'>
         <Form.Floating>
           <Form.Select value={layer.directionPreset} onChange={e => setDirection(e.target.value)} >
             <option value="">Select Start Point</option>
