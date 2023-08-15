@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { basic } from "../cardLayouts";
-import Guidelines from "./guidelines";
 
 export default function Background({props: layers, propKey, index} : {props: Array<background>, propKey: colorKey, index: number})  {
   const boxSizing = basic;
@@ -87,8 +86,6 @@ export default function Background({props: layers, propKey, index} : {props: Arr
             fill={layer.type === "solid" && layer.value[0].color || `url(#GradientBackground-${index}-${i})`}
           />
         }
-
-        { layer.showGuide && <Guidelines colorName={`url(#GradientBackground-${index}-${i})`} layer={layer}/> }
       </g>
     ))}
   </>

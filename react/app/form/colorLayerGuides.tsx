@@ -1,19 +1,11 @@
 "use client";
 import { useContext } from 'react';
 import { Form, InputGroup } from "react-bootstrap";
-import { CardContext, defaultValues } from "../defaults";
+import { CardContext } from "../defaults";
 
 export default function ColorLayerGuides({propKey, index, setCardData, hideXY} : {propKey: colorKey, index: number, setCardData: (data: CardData) => void, hideXY?: boolean})  {
   const data = useContext(CardContext);
   const layer = data[propKey][index];
-
-  function createRange(key : backgroundProperty) {
-    return <>
-      <InputGroup.Text>{key}</InputGroup.Text>
-      <Form.Range className="form-control h-auto p-2 bg-primary-subtle" min={defaultValues[key].min} max={defaultValues[key].max} value={layer[key] !== undefined? layer[key] : defaultValues[key].default} onChange={(e) => {handleChange(key, e.target.value)}}/>
-      {layer[key]}
-    </>
-  }
 
   function handleChange(property: backgroundProperty | 'showGuide' | 'spread', value : string) {
     switch (property) {
@@ -62,7 +54,11 @@ export default function ColorLayerGuides({propKey, index, setCardData, hideXY} :
       layer.type === 'radialGradient' && <>
         {/* radius */}
         <InputGroup>
-          {createRange('radius')}
+          <InputGroup.Text>radius</InputGroup.Text>
+          <Form.Range className="form-control h-auto p-2 bg-primary-subtle"
+            min={0} max={100} value={layer.radius !== undefined? layer.radius : 100}
+            onChange={(e) => {handleChange('radius', e.target.value)}}
+          />
         </InputGroup>
         {/* spread */}
         <Form.Select value={layer.spread} onChange={(e) => {handleChange('spread', e.target.value)}}>

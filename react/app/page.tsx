@@ -93,20 +93,20 @@ function EditCard({cardData, index}: {cardData: CardData, index: number}) {
 
   return (
     <>
-      <Container>
+      <Container className='mw-100'>
         <Row>
-          <Col sm={8}>
+          <Col sm={8} className='p-1'>
             <CardContext.Provider value={cardData}>
               <MainForm setCardData={setCardData} />
             </CardContext.Provider>
           </Col>
-          <Col>
+          <Col className='p-1'>
             <CardSvg index={index} data={cardData}  />
           </Col>
         </Row>
       </Container>
       
-      {JSON.stringify(cardData)}
+      {/* {JSON.stringify(cardData)} */}
     </>
   )
 }

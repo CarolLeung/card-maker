@@ -1,4 +1,5 @@
 import Background from "./background";
+import Guidelines from "./guidelines";
 
 export default function CardSvg({index, data} : {index: number, data: CardData}) {
   return <svg width="216" height="313" viewBox="0 0 216 313" id="svg"
@@ -12,5 +13,9 @@ export default function CardSvg({index, data} : {index: number, data: CardData})
     </mask>
     <Background key={'border'} props={data.border} propKey={'border'} index={index}></Background>
     <Background key={'background'} props={data.background} propKey={'background'} index={index}></Background>
+
+    {data.background.map((layer, i) => (
+      layer.showGuide && <Guidelines colorName={`url(#GradientBackground-${index}-${i})`} layer={layer}/>
+    ))}
   </svg>
 }
