@@ -40,15 +40,19 @@ export default function ColorLayerGuides({propKey, index, setCardData, hideXY} :
           label={'Show Guideline'}
           onChange={() => {handleChange('showGuide', '')}}
         />
-        {/* start point */}
-        <InputGroup>
-          {createRange('startX')}
-          {createRange('startY')}
-        </InputGroup>
-        {/* end point */}
-        <InputGroup>
-          {createRange('endX')}
-          {createRange('endY')}
+        <InputGroup style={{justifyContent: 'space-evenly', margin: '0.5rem 0'}}>
+          <div className='coordinate-sliders'>
+            <Form.Range className="p-2 bg-primary-subtle" min={0} max={100} step={10} value={layer.startX} onChange={e => {handleChange('startX', e.target.value)}}/>
+            <Form.Range className="p-2 bg-primary-subtle vertical-range" min={0} max={100} step={10} value={layer.startY} onChange={e => {handleChange('startY', e.target.value)}}/>
+            <div className='background' style={{backgroundColor: layer.value[0].color}}/>
+            <div>1</div>
+          </div>
+          <div className='coordinate-sliders'>
+            <Form.Range className="p-2 bg-primary-subtle" min={0} max={100} step={10} value={layer.endX} onChange={e => {handleChange('endX', e.target.value)}}/>
+            <Form.Range className="p-2 bg-primary-subtle vertical-range" min={0} max={100} step={10} value={layer.endY} onChange={e => {handleChange('endY', e.target.value)}}/>
+            <div className='background' style={{backgroundColor: layer.value[layer.value.length - 1].color}}/>
+            <div>2</div>
+          </div>
         </InputGroup>
       </>
     }

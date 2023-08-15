@@ -37,7 +37,7 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
 
   return <Container className='colorLayers'>
     <Row className={`colorLayer ${layer.type} p-0`}>
-      <Col sm={2} className='colorType p-2'>
+      <Col sm={2} className='colorType p-0'>
         {/* select type */}
         <Form.Floating>
           <Form.Select value={layer.type} disabled={!index} onChange={e => {
