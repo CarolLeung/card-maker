@@ -1,6 +1,7 @@
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/form.scss';
+import './styles/svg.scss';
 
 export default function RootLayout({
   children,

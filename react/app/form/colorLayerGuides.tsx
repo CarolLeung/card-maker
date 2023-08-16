@@ -23,15 +23,15 @@ export default function ColorLayerGuides({propKey, index, setCardData, hideXY} :
   }
 
   return <InputGroup>
+    <Form.Check
+      type="checkbox"
+      checked={!!layer.showGuide}
+      label={'Show Guideline'}
+      onChange={() => {handleChange('showGuide', '')}}
+    />
     {
       !hideXY && <>
         {/* show guideline */}
-        <Form.Check
-          type="checkbox"
-          checked={!!layer.showGuide}
-          label={'Show Guideline'}
-          onChange={() => {handleChange('showGuide', '')}}
-        />
         <InputGroup style={{justifyContent: 'space-evenly', margin: '0.5rem 0'}}>
           <div className='coordinate-sliders'>
             <Form.Range className="p-2 bg-primary-subtle" min={0} max={100} step={10} value={layer.startX} onChange={e => {handleChange('startX', e.target.value)}}/>
