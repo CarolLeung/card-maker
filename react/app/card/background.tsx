@@ -10,7 +10,7 @@ export default function Background({props: layers, propKey, index} : {props: Arr
         {
           layer.type === "linearGradient" && <defs>
             <linearGradient
-              id={`GradientBackground-${index}-${i}`}
+              id={`Gradient${propKey}-${index}-${i}`}
               x1={`${layer.startX || 0}%`}
               y1={`${layer.startY || 0}%`}
               x2={`${layer.endX || 0}%`}
@@ -41,7 +41,7 @@ export default function Background({props: layers, propKey, index} : {props: Arr
         {
           layer.type === "radialGradient" && <defs>
             <radialGradient
-              id={`GradientBackground-${index}-${i}`}
+              id={`Gradient${propKey}-${index}-${i}`}
               cx={`${layer.startX || 0}%`}
               cy={`${layer.startY || 0}%`}
               fx={`${layer.endX || 0}%`}
@@ -83,7 +83,7 @@ export default function Background({props: layers, propKey, index} : {props: Arr
             width={boxSizing.width - (propKey !== 'border' && boxSizing.borderThickness? boxSizing.borderThickness * 2 : 0)}
             height={boxSizing.height - (propKey !== 'border' && boxSizing.borderThickness? boxSizing.borderThickness * 2 : 0)}
             x={propKey !== 'border' ? boxSizing.borderThickness : 0} y={propKey !== 'border' ? boxSizing.borderThickness : 0} rx={propKey !== 'border' ? boxSizing.innerRadius : boxSizing.outerRadius} ry={propKey !== 'border' ? boxSizing.innerRadius : boxSizing.outerRadius}
-            fill={layer.type === "solid" && layer.value[0].color || `url(#GradientBackground-${index}-${i})`}
+            fill={layer.type === "solid" && layer.value[0].color || `url(#Gradient${propKey}-${index}-${i})`}
           />
         }
       </g>

@@ -84,7 +84,7 @@ export default function ColorLayer({propKey, index, setCardData} : {propKey: col
               {Array.from({ length: 3 }).map((_, indexCol) => (
                 <ToggleButton
                   key={indexCol}
-                  id={`radialLocation${3 * indexRow +  (indexCol + 1)}-layer${index}`}
+                  id={`${propKey}RadialLocation${3 * indexRow +  (indexCol + 1)}-layer${index}`}
                   type="radio"
                   variant="outline-primary"
                   name={`layer-${index}`}
