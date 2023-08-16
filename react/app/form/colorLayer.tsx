@@ -1,11 +1,11 @@
 "use client";
-import { useContext, useState } from 'react';
-import { Form, Button, Row, Col, Container, ToggleButtonGroup, ToggleButton, Table } from "react-bootstrap";
+import { useContext } from 'react';
+import { Form, Button, Row, Col, Container, ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 import { CardContext } from "../defaults";
 import ColorLayerData from './colorLayerData';
 import ColorLayerGuides from './colorLayerGuides';
 
-export default function ColorLayer({propKey, index, setCardData} : {propKey: colorKey, index: number, setCardData: (data: CardData) => void})  {
+export default function ColorLayer({propKey, index, setCardData} : colorSection)  {
   const data = useContext(CardContext);
   const layer = data[propKey][index];
 

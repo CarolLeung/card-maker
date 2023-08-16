@@ -25,7 +25,8 @@ export const defaultCard: CardData = {
       endY: 50,
       radius: 100,
     }
-  ]
+  ],
+  header: []
 }
 
 export const CardContext = createContext(defaultCard);

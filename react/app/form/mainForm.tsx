@@ -1,10 +1,11 @@
 import { Accordion, Form } from "react-bootstrap";
 import ColorSection from "./colorSection";
+import TextSection from "./textSection";
 
 export default function MainForm({setCardData} : {setCardData: (data: CardData) => void}) {
 
   return <Form action="">
-    <Accordion defaultActiveKey="0">
+    <Accordion defaultActiveKey="3">
       {/* layout */}
       <Accordion.Item eventKey="0">
         <Accordion.Header>Layout</Accordion.Header>
@@ -22,27 +23,21 @@ export default function MainForm({setCardData} : {setCardData: (data: CardData) 
       <Accordion.Item eventKey="1">
         <Accordion.Header>Background</Accordion.Header>
         <Accordion.Body className="p-1">
-          <ColorSection propKey={"background"} setCardData={setCardData} />
+          <ColorSection propKey={"background"} setCardData={setCardData} index={0} />
         </Accordion.Body>
       </Accordion.Item>
       {/* border */}
       <Accordion.Item eventKey="2">
         <Accordion.Header>Border</Accordion.Header>
         <Accordion.Body>
-          <ColorSection propKey={"border"} setCardData={setCardData} />
+          <ColorSection propKey={"border"} setCardData={setCardData} index={0} />
         </Accordion.Body>
       </Accordion.Item>
       {/* header */}
       <Accordion.Item eventKey="3">
         <Accordion.Header>Header</Accordion.Header>
         <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          <TextSection propKey={"header"} setCardData={setCardData} index={0} />
         </Accordion.Body>
       </Accordion.Item>
       {/* image */}

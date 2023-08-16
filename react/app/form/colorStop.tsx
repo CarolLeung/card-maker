@@ -2,7 +2,13 @@ import { useContext, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { CardContext } from '../defaults';
 
-export default function ColorStop({propKey, layerIndex, colorIndex, showOpacity, deletable, setCardData} : {propKey: colorKey, layerIndex: number, colorIndex: number, showOpacity: boolean, deletable: boolean, setCardData: (data: CardData) => void})  {
+interface colorStopSection extends colorSection {
+  colorIndex: number;
+  showOpacity: boolean;
+  deletable: boolean;
+}
+
+export default function ColorStop({propKey, index: layerIndex, setCardData, colorIndex, showOpacity, deletable}: colorStopSection){
   const data = useContext(CardContext);
   const [waitForUpdate, setWait] = useState(false);
   const props = data[propKey][layerIndex].value[colorIndex];

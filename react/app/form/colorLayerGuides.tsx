@@ -3,7 +3,11 @@ import { useContext } from 'react';
 import { Form, InputGroup } from "react-bootstrap";
 import { CardContext } from "../defaults";
 
-export default function ColorLayerGuides({propKey, index, setCardData, hideXY} : {propKey: colorKey, index: number, setCardData: (data: CardData) => void, hideXY?: boolean})  {
+interface colorLayerGuideSection extends colorSection {
+  hideXY?: boolean;
+}
+
+export default function ColorLayerGuides({propKey, index, setCardData, hideXY}: colorLayerGuideSection) {
   const data = useContext(CardContext);
   const layer = data[propKey][index];
 

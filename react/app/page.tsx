@@ -106,7 +106,7 @@ function EditCard({cardData, index}: {cardData: CardData, index: number}) {
         </Row>
       </Container>
       
-      {/* {JSON.stringify(cardData)} */}
+      {JSON.stringify(cardData)}
     </>
   )
 }

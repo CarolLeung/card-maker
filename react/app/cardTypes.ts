@@ -10,9 +10,26 @@ interface CardData {
   border: Array<background>
   background: Array<background>
   attacks?: Array<attack>
+  header: Array<string>
+  // footer: Array<string>
 }
 
+interface cardSection {
+  setCardData: (data: CardData) => void;
+  index: number;
+}
+
+interface colorSection extends cardSection {
+  propKey: colorKey
+}
+
+interface textSection extends cardSection {
+  propKey: textKey
+}
+
+
 type colorKey = "background" | "border";
+type textKey = "header";// | "footer";
 
 interface background {
   type: backgroundType
@@ -30,19 +47,6 @@ interface background {
 }
 
 type backgroundProperty = "startX" | "startY" | "endX" | "endY" | "radius";
-interface backgroundPropertyDefault {
-  startX: backgroundPropertyDefaultFields
-  startY: backgroundPropertyDefaultFields
-  endX: backgroundPropertyDefaultFields
-  endY: backgroundPropertyDefaultFields
-  radius: backgroundPropertyDefaultFields
-}
-
-interface backgroundPropertyDefaultFields {
-  max: number
-  min: number
-  default: number
-}
 
 type backgroundType = "solid" | "linearGradient" | "radialGradient" | "image";
 type radialSpread = "pad" | "reflect" | "repeat";

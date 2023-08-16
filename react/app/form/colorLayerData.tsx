@@ -4,7 +4,7 @@ import { Form, InputGroup, Button, Row, Col } from "react-bootstrap";
 import ColorStop from './colorStop';
 import { CardContext } from "../defaults";
 
-export default function ColorLayerData({propKey, index, setCardData} : {propKey: colorKey, index: number, setCardData: (data: CardData) => void})  {
+export default function ColorLayerData({propKey, index, setCardData} : colorSection)  {
   const data = useContext(CardContext);
   const layer = data[propKey][index];
   const [imageSource, seImageSource] = useState('link');
@@ -21,7 +21,7 @@ export default function ColorLayerData({propKey, index, setCardData} : {propKey:
     {/* choose colors */}
     { layer.type === "solid" &&
       <InputGroup>
-        <ColorStop propKey={propKey} layerIndex={index} colorIndex={0} showOpacity={false} deletable={false} setCardData={setCardData} />
+        <ColorStop propKey={propKey} index={index} colorIndex={0} showOpacity={false} deletable={false} setCardData={setCardData} />
       </InputGroup >}
     { (layer.type === "linearGradient" || layer.type === "radialGradient") &&
       <Form.Group>
@@ -36,7 +36,7 @@ export default function ColorLayerData({propKey, index, setCardData} : {propKey:
         />
         {layer.value.map((_, stopIndex)=> (
           <InputGroup key={`stop-color-${stopIndex}`}>
-            <ColorStop propKey={propKey} layerIndex={index} colorIndex={stopIndex} showOpacity={true} deletable={true} setCardData={setCardData} />
+            <ColorStop propKey={propKey} index={index} colorIndex={stopIndex} showOpacity={true} deletable={true} setCardData={setCardData} />
           </InputGroup >
         ))}
         <Button variant="secondary" className="mt-2" onClick={() => {
