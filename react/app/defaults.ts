@@ -26,7 +26,13 @@ export const defaultCard: CardData = {
       radius: 100,
     }
   ],
-  header: []
+  header: [
+    {
+      type: 'title',
+      value: 'card title',
+      position: 'left',
+    }
+  ]
 }
 
 export const CardContext = createContext(defaultCard);
@@ -44,4 +50,10 @@ export const defaultBackground: background = {
   radius: 100,
   directionPreset: '0-1-0',
   radialPreset: '1-1'
+}
+
+export const defaultText: textElement = {
+  type: 'title',
+  value: 'placeholeder',
+  position: 'left',
 }

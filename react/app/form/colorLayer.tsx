@@ -87,7 +87,6 @@ export default function ColorLayer({propKey, index, setCardData} : colorSection)
                   id={`${propKey}RadialLocation${3 * indexRow +  (indexCol + 1)}-layer${index}`}
                   type="radio"
                   variant="outline-primary"
-                  name={`layer-${index}`}
                   value={`${indexRow}-${indexCol}`}
                   checked={layer.radialPreset === `${indexRow}-${indexCol}`}
                   onChange={e => setDirection(e.target.value)}

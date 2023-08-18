@@ -1,15 +1,16 @@
 import Background from "./background";
 import Guidelines from "./guidelines";
 import { basic } from "../cardLayouts";
+import TextFragment from "./text";
 
 export default function CardSvg({index, data} : {index: number, data: CardData}) {
   const boxSizing = basic;
 
-  return <svg width={boxSizing.width} height={boxSizing.height} viewBox={`0 0 ${boxSizing.width} ${boxSizing.height}`} id="svg"
-    version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-  style={{
-    width: '100%', height: '100%',
-  }}
+  return <svg width={boxSizing.width} height={boxSizing.height} viewBox={`0 0 ${boxSizing.width} ${boxSizing.height}`}
+    id="svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+    style={{
+      width: '100%', height: '100%',
+    }}
   >
     <mask id="borderMask">
       <rect
@@ -23,8 +24,11 @@ export default function CardSvg({index, data} : {index: number, data: CardData})
     <Background key={'border'} props={data.border} propKey={'border'} index={index}></Background>
     <Background key={'background'} props={data.background} propKey={'background'} index={index}></Background>
 
+    <TextFragment key={'header'} props={data.header} propKey={'header'} index={index} />
+
     {data.background.map((layer, i) => (
-      (layer.directionPreset === 'custom' && layer.showGuide) && <Guidelines key={i} colorName={`url(#GradientBackground-${index}-${i})`} layer={layer}/>
+      (layer.directionPreset === 'custom' && layer.showGuide) &&
+        <Guidelines key={i} colorName={`url(#GradientBackground-${index}-${i})`} layer={layer}/>
     ))}
   </svg>
 }

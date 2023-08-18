@@ -10,8 +10,8 @@ interface CardData {
   border: Array<background>
   background: Array<background>
   attacks?: Array<attack>
-  header: Array<string>
-  // footer: Array<string>
+  header: Array<textElement>
+  // footer: Array<textElement>
 }
 
 interface cardSection {
@@ -56,6 +56,17 @@ interface backgroundStops {
   opacity?: number
   url?: string
 }
+
+interface textElement {
+  type: textElementType
+  value: string
+  position: textPositions
+  italics?: boolean
+  bold?: boolean
+}
+type textElementType = "title" | "subtitle" | "icon";
+type textElementProperties = "italics" | "bold";
+type textPositions =  "left" | "center" | "right"
 
 interface attack {
   type: "name" | "description"
