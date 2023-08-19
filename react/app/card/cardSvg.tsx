@@ -24,7 +24,7 @@ export default function CardSvg({index, data} : {index: number, data: CardData})
     <Background key={'border'} props={data.border} propKey={'border'} index={index}></Background>
     <Background key={'background'} props={data.background} propKey={'background'} index={index}></Background>
 
-    <TextFragment key={'header'} props={data.header} propKey={'header'} index={index} />
+    <TextFragment key={'header'} props={data.header} propKey={'header'} />
 
     {data.background.map((layer, i) => (
       (layer.directionPreset === 'custom' && layer.showGuide) &&

@@ -1,18 +1,39 @@
 import { useContext } from 'react';
 import TextLayer from './textLayer';
-import { Button } from 'react-bootstrap';
 import { CardContext, defaultText } from "../defaults";
+import { Tabs, Tab, Button } from 'react-bootstrap';
 
 export default function TextSection({propKey, setCardData} : textSection)  {
+  return <>
+    <Tabs
+      defaultActiveKey="profile"
+      id={`${propKey}-position-tabs`}
+      className="mb-3"
+      fill
+    >
+      <Tab eventKey="left" title="Left">
+        <TextPosition propKey={propKey} setCardData={setCardData} position={'left'} index={0}/>
+      </Tab>
+      <Tab eventKey="center" title="Center">
+        <TextPosition propKey={propKey} setCardData={setCardData} position={'center'} index={0}/>
+      </Tab>
+      <Tab eventKey="right" title="Right">
+        <TextPosition propKey={propKey} setCardData={setCardData} position={'right'} index={0}/>
+      </Tab>
+    </Tabs>
+  </>
+}
+
+function TextPosition({propKey, setCardData, position} : textPositionI) {
   const data = useContext(CardContext);
-  const layers = data[propKey];
+  const layers = data[propKey][position];
 
   return <>
     {layers.map((_, i) => (
-      <TextLayer key={`${propKey}-layer-${i}`} propKey={propKey as textKey} index={i} setCardData={setCardData} ></TextLayer>
+      <TextLayer key={`${propKey}-layer-${i}`} propKey={propKey} index={i} setCardData={setCardData} position={position}></TextLayer>
     ))}
     <Button variant="primary" className='mt-2' onClick={() => {
-      data[propKey].push(JSON.parse(JSON.stringify(defaultText)));
+      data[propKey][position].push(JSON.parse(JSON.stringify(defaultText)));
       setCardData(data);
     } }>Add Element</Button>
   </>

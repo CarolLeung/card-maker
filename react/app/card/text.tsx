@@ -1,48 +1,45 @@
 import { basic } from "../cardLayouts";
 
-export default function TextFragment({props, propKey, index} : {props: Array<textElement>, propKey: string, index: number}) {
+export default function TextFragment({props, propKey} : {props: textRow, propKey: string}) {
+	const cardLayout = basic;
+
 	function setTextDecorationClasses(layer: textElement) {
 		const prop = ['italics','bold'];
-		let className = layer.position;
+		let className = '';
 		for (let i = 0; i < prop.length; i++) {
 			if (layer[prop[i] as textElementProperties] === true) {
-				className += ` ${prop[i]}`;
+				className += `${prop[i]} `;
 			}
 		}
-		return className
+		return className;
 	}
 
-	function groupTextByPosition() {
-		const leftElements = []; const centerElements = []; const rightElements = [];
-		// track location, elements go left of each other by section
-		for (let i = 0; i < props.length; i++) {
-			const layer = props[i];
-			// el changes depending on layer.type
+	function groupTextByPosition(position: textPositions) {
+		const elements = [];
+		for (let i = 0; i < props[position].length; i++) {
+			const layer = props[position][i];
 			const el = 
-				<text key={`${i}`} x={0} y={0} className={setTextDecorationClasses(layer)} id={`svg-${index}-text-${propKey}-title-${i}`}>
+				<tspan key={`${i}`} className={setTextDecorationClasses(layer)}>
 					{layer.value} 
-				</text>
-
-			switch (layer.position) {
-				case 'center':
-					centerElements.push(el);
-					break;
-				case 'right':
-					rightElements.push(el);
-					break;
-				default:
-					leftElements.push(el);
-					break;
-			}
+				</tspan>
+			elements.push(el);
 		}
 		return <>
-			<g className="left">{leftElements}</g>
-			<g className="center">{centerElements}</g>
-			<g className="right">{rightElements}</g>
+			{elements}
 		</>
 	}
 
-	return <g className={`${propKey}`}>
-		{groupTextByPosition()}
+	return <g className={`${propKey}`}
+	 	transform={`translate(${(cardLayout.borderThickness || 0) + 3},${(cardLayout.borderThickness || 0) + 15})`}
+	 >
+		<text className="left" style={{textAnchor: 'start'}}>{groupTextByPosition('left')}</text>
+		<text className="center" style={{textAnchor: 'middle'}}
+			x={cardLayout.width / 2 - ((cardLayout.borderThickness || 0)) - 3}>
+				{groupTextByPosition('center')}
+		</text>
+		<text className="right" style={{textAnchor: 'end'}}
+			x={cardLayout.width - ((cardLayout.borderThickness || 0) * 2) - 6}>
+				{groupTextByPosition('right')}
+		</text>
 	</g>
 }

@@ -12,27 +12,28 @@ export const defaultCard: CardData = {
       type: 'solid',
       value: [{color: '#ffffff'}]
     },
-    {
-      type: 'linearGradient',
-      value: [
-        {color: "#7B00A3", opacity: 5},
-        {color: "#8f6161", opacity: 5}
-      ],
-      showGuide: true,
-      startX: 0,
-      startY: 50,
-      endX: 100,
-      endY: 50,
-      radius: 100,
-    }
+    // {
+    //   type: 'linearGradient',
+    //   value: [
+    //     {color: "#7B00A3", opacity: 5},
+    //     {color: "#8f6161", opacity: 5}
+    //   ],
+    //   showGuide: true,
+    //   startX: 0,
+    //   startY: 50,
+    //   endX: 100,
+    //   endY: 50,
+    //   radius: 100,
+    // }
   ],
-  header: [
-    {
-      type: 'title',
+  header: {
+    left: [{
+      type: 'text',
       value: 'card title',
-      position: 'left',
-    }
-  ]
+    }],
+    center: [],
+    right: []
+  }
 }
 
 export const CardContext = createContext(defaultCard);
@@ -53,7 +54,6 @@ export const defaultBackground: background = {
 }
 
 export const defaultText: textElement = {
-  type: 'title',
-  value: 'placeholeder',
-  position: 'left',
+  type: 'text',
+  value: 'placeholder',
 }

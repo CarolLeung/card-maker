@@ -10,27 +10,24 @@ interface CardData {
   border: Array<background>
   background: Array<background>
   attacks?: Array<attack>
-  header: Array<textElement>
+  header: textRow
   // footer: Array<textElement>
 }
 
 interface cardSection {
-  setCardData: (data: CardData) => void;
-  index: number;
+  setCardData: (data: CardData) => void
+  index: number
 }
-
-interface colorSection extends cardSection {
-  propKey: colorKey
-}
-
-interface textSection extends cardSection {
-  propKey: textKey
-}
-
+interface colorSection extends cardSection { propKey: colorKey }
+interface textSection extends cardSection { propKey: textKey }
+interface textPositionI extends textSection { position: textPositions }
 
 type colorKey = "background" | "border";
 type textKey = "header";// | "footer";
 
+/********************************
+* Background interfaces
+*********************************/ 
 interface background {
   type: backgroundType
   value: Array<backgroundStops>
@@ -57,14 +54,22 @@ interface backgroundStops {
   url?: string
 }
 
+/********************************
+* Text interfaces
+*********************************/
+interface textRow {
+  left: Array<textElement>
+  center: Array<textElement>
+  right: Array<textElement>
+}
+
 interface textElement {
   type: textElementType
   value: string
-  position: textPositions
   italics?: boolean
   bold?: boolean
 }
-type textElementType = "title" | "subtitle" | "icon";
+type textElementType = "text" | "icon";
 type textElementProperties = "italics" | "bold";
 type textPositions =  "left" | "center" | "right"
 
