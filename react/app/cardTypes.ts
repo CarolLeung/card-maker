@@ -68,9 +68,12 @@ interface textElement {
   value: string
   italics?: boolean
   bold?: boolean
+  underline?: boolean
+  color: string
+  size: number
 }
 type textElementType = "text" | "icon";
-type textElementProperties = "italics" | "bold";
+type textElementDecorations = "italics" | "bold" | "underline";
 type textPositions =  "left" | "center" | "right"
 
 interface attack {

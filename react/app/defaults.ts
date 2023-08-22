@@ -30,6 +30,8 @@ export const defaultCard: CardData = {
     left: [{
       type: 'text',
       value: 'card title',
+      color: '#000000',
+      size: 16,
     }],
     center: [],
     right: []
@@ -56,4 +58,6 @@ export const defaultBackground: background = {
 export const defaultText: textElement = {
   type: 'text',
   value: 'placeholder',
+  color: '#000000',
+  size: 16,
 }

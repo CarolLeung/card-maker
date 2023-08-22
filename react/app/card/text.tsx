@@ -4,10 +4,10 @@ export default function TextFragment({props, propKey} : {props: textRow, propKey
 	const cardLayout = basic;
 
 	function setTextDecorationClasses(layer: textElement) {
-		const prop = ['italics','bold'];
+		const prop = ['italics','bold','underline'];
 		let className = '';
 		for (let i = 0; i < prop.length; i++) {
-			if (layer[prop[i] as textElementProperties] === true) {
+			if (layer[prop[i] as textElementDecorations] === true) {
 				className += `${prop[i]} `;
 			}
 		}
@@ -19,7 +19,7 @@ export default function TextFragment({props, propKey} : {props: textRow, propKey
 		for (let i = 0; i < props[position].length; i++) {
 			const layer = props[position][i];
 			const el = 
-				<tspan key={`${i}`} className={setTextDecorationClasses(layer)}>
+				<tspan key={`${i}`} className={setTextDecorationClasses(layer)} style={{fill: layer.color, fontSize: layer.size}}>
 					{layer.value} 
 				</tspan>
 			elements.push(el);
