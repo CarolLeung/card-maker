@@ -27,14 +27,16 @@ export const defaultCard: CardData = {
     // }
   ],
   header: {
-    left: [{
-      type: 'text',
-      value: 'card title',
-      color: '#000000',
-      size: 16,
-    }],
-    center: [],
-    right: []
+    left: {
+      text: [{
+        type: 'text',
+        value: 'card title',
+        color: '#000000',
+        size: 16,
+      }],
+    },
+    center: { text: [] },
+    right: { text: [] }
   }
 }
 

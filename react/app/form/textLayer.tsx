@@ -1,14 +1,14 @@
 import { useContext, useState } from 'react';
 import { CardContext } from "../defaults";
-import { Form, Button, Row, Col, Container, ToggleButtonGroup, ToggleButton, FormGroup, InputGroup } from "react-bootstrap";
+import { Form, Button, Row, Col, Container, ToggleButtonGroup, ToggleButton, InputGroup } from "react-bootstrap";
 
 export default function TextLayer({propKey, index, setCardData, position} : textPositionI)  {
   const data = useContext(CardContext);
-  const layer = data[propKey][position][index];
+  const layer = data[propKey][position].text[index];
   const [waitForUpdate, setWait] = useState(false);
   function textInput(value: string) {
-    data[propKey][position][index] = {
-      ...data[propKey][position][index],
+    data[propKey][position].text[index] = {
+      ...data[propKey][position].text[index],
       value
     }
     setCardData(data);
@@ -23,7 +23,7 @@ export default function TextLayer({propKey, index, setCardData, position} : text
       value={`${type}-${position}-${index}`}
       checked={layer[type as textElementDecorations]}
       onChange={() => {
-        data[propKey][position][index][type as textElementDecorations] = !data[propKey][position][index][type as textElementDecorations];
+        data[propKey][position].text[index][type as textElementDecorations] = !data[propKey][position].text[index][type as textElementDecorations];
         setCardData(data);
       }}
       >
@@ -42,7 +42,7 @@ export default function TextLayer({propKey, index, setCardData, position} : text
             {textMods('underline')}
           </ToggleButtonGroup>
           <Form.Control type="color" value={layer.color} onChange={e => {
-            data[propKey][position][index].color = e.target.value;
+            data[propKey][position].text[index].color = e.target.value;
             // add delay to update color input so it doesn't lag
             if (!waitForUpdate) {
               setWait(true);
@@ -55,11 +55,11 @@ export default function TextLayer({propKey, index, setCardData, position} : text
           <Form.Control type="number" value={layer.size} min={10} max={18} onChange={e => {
             const value = Number(e.target.value);
             if (value < 10) {
-              data[propKey][position][index].size = 10;
+              data[propKey][position].text[index].size = 10;
             } else if (value > 18) {
-              data[propKey][position][index].size = 18;
+              data[propKey][position].text[index].size = 18;
             } else {
-              data[propKey][position][index].size = Number(e.target.value);
+              data[propKey][position].text[index].size = value;
             }
             setCardData(data);
           } }/>
@@ -69,7 +69,7 @@ export default function TextLayer({propKey, index, setCardData, position} : text
       </Col>
       {/* delete button */}
       <Button variant="danger" className="btn-close" onClick={() => {
-        data[propKey][position].splice(index, 1);
+        data[propKey][position].text.splice(index, 1);
         setCardData(data);
       }}></Button>
     </Row>

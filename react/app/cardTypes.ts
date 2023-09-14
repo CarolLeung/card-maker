@@ -58,9 +58,14 @@ interface backgroundStops {
 * Text interfaces
 *********************************/
 interface textRow {
-  left: Array<textElement>
-  center: Array<textElement>
-  right: Array<textElement>
+  left: textColumn
+  center: textColumn
+  right: textColumn
+}
+
+interface textColumn {
+  icon?: iconElement
+  text: Array<textElement>
 }
 
 interface textElement {
@@ -74,7 +79,11 @@ interface textElement {
 }
 type textElementType = "text" | "icon";
 type textElementDecorations = "italics" | "bold" | "underline";
-type textPositions =  "left" | "center" | "right"
+type textPositions =  "left" | "center" | "right";
+
+interface iconElement {
+  color?: string
+}
 
 interface attack {
   type: "name" | "description"

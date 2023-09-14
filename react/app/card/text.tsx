@@ -16,8 +16,8 @@ export default function TextFragment({props, propKey} : {props: textRow, propKey
 
 	function groupTextByPosition(position: textPositions) {
 		const elements = [];
-		for (let i = 0; i < props[position].length; i++) {
-			const layer = props[position][i];
+		for (let i = 0; i < props[position].text.length; i++) {
+			const layer = props[position].text[i];
 			const el = 
 				<tspan key={`${i}`} className={setTextDecorationClasses(layer)} style={{fill: layer.color, fontSize: layer.size}}>
 					{layer.value} 

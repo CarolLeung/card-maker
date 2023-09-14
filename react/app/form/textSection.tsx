@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import TextLayer from './textLayer';
 import { CardContext, defaultText } from "../defaults";
 import { Tabs, Tab, Button } from 'react-bootstrap';
+import TextIcon from './textIcon';
 
 export default function TextSection({propKey, setCardData} : textSection)  {
   return <>
@@ -26,14 +27,15 @@ export default function TextSection({propKey, setCardData} : textSection)  {
 
 function TextPosition({propKey, setCardData, position} : textPositionI) {
   const data = useContext(CardContext);
-  const layers = data[propKey][position];
+  const layer = data[propKey][position];
 
   return <>
-    {layers.map((_, i) => (
+    {layer.text.map((_, i) => (
       <TextLayer key={`${propKey}-layer-${i}`} propKey={propKey} index={i} setCardData={setCardData} position={position}></TextLayer>
     ))}
+    <TextIcon propKey={propKey} setCardData={setCardData} position={position}></TextIcon>
     <Button variant="primary" className='mt-2' onClick={() => {
-      data[propKey][position].push(JSON.parse(JSON.stringify(defaultText)));
+      data[propKey][position].text.push(JSON.parse(JSON.stringify(defaultText)));
       setCardData(data);
     } }>Add Element</Button>
   </>
