@@ -22,17 +22,17 @@ export default function Guidelines({colorName, layer} : {colorName: string, laye
 		<line
 			x1={startX} y1={startY}
 			x2={endX} y2={endY}
-			stroke="#cfe2ff" strokeWidth="17"
+			stroke="#cfe2ff" strokeWidth="7"
 		/>
 		<circle cx={startX} cy={startY} r={radius} fill="#cfe2ff" />
 		<circle cx={endX} cy={endY} r={radius} fill="#cfe2ff" />
 
-		<line
+		{/* <line
 			x1={startX} y1={startY}
 			x2={endX} y2={endY}
 			stroke={colorName}
 			strokeWidth="7"
-		/>
+		/> */}
 
 		<circle cx={startX} cy={startY} r="15" fill={layer.value[0].color}/>
 		<text x={startX} y={startY} dx={-6} dy={10} className="guide-text">1</text>

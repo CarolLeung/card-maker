@@ -7,7 +7,7 @@ export default function MainForm({setCardData} : {setCardData: (data: CardData) 
   return <Form action="">
     <Accordion defaultActiveKey="3">
       {/* layout */}
-      <Accordion.Item eventKey="0">
+      {/* <Accordion.Item eventKey="0">
         <Accordion.Header>Layout</Accordion.Header>
         <Accordion.Body>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -18,7 +18,7 @@ export default function MainForm({setCardData} : {setCardData: (data: CardData) 
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </Accordion.Body>
-      </Accordion.Item>
+      </Accordion.Item> */}
       {/* background */}
       <Accordion.Item eventKey="1">
         <Accordion.Header>Background</Accordion.Header>
@@ -41,7 +41,7 @@ export default function MainForm({setCardData} : {setCardData: (data: CardData) 
         </Accordion.Body>
       </Accordion.Item>
       {/* image */}
-      <Accordion.Item eventKey="4">
+      {/* <Accordion.Item eventKey="4">
         <Accordion.Header>Image</Accordion.Header>
         <Accordion.Body>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -52,9 +52,9 @@ export default function MainForm({setCardData} : {setCardData: (data: CardData) 
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </Accordion.Body>
-      </Accordion.Item>
+      </Accordion.Item> */}
       {/* body */}
-      <Accordion.Item eventKey="5">
+      {/* <Accordion.Item eventKey="5">
         <Accordion.Header>Body</Accordion.Header>
         <Accordion.Body>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -65,9 +65,9 @@ export default function MainForm({setCardData} : {setCardData: (data: CardData) 
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </Accordion.Body>
-      </Accordion.Item>
+      </Accordion.Item> */}
       {/* footer */}
-      <Accordion.Item eventKey="6">
+      {/* <Accordion.Item eventKey="6">
         <Accordion.Header>Footer</Accordion.Header>
         <Accordion.Body>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -78,7 +78,7 @@ export default function MainForm({setCardData} : {setCardData: (data: CardData) 
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </Accordion.Body>
-      </Accordion.Item>
+      </Accordion.Item> */}
     </Accordion>
   </Form>
 }

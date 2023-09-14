@@ -12,6 +12,37 @@ export default function Document() {
   const [cardList, setCardList] = useState(()=> {return [JSON.parse(JSON.stringify(defaultCard))]});
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
 
+  function cardGroups() {
+    const topCards = [];
+    const bottomCards = [];
+
+    for (let i = 0; i < cardList.length; i++) {
+      let tempCard = <div key={`card-${i}`} onClick={() => setCurrentCardIndex(i)} style={{maxWidth: '100px'}}>
+        card {i} 
+        {i == currentCardIndex && <> is current card</>}:
+        <CardSvg data={cardList[i]} index={i} />
+      </div>
+      if (i < currentCardIndex) {
+        topCards.push(tempCard);
+      } else if (i > currentCardIndex) {
+        bottomCards.push(tempCard);
+      }
+    }
+
+    return <>
+      <div className='cardBucket'>
+        {topCards}
+      </div>
+      <div style={{margin: '2% 0'}}>
+        <Button onClick={makeNewCard} variant="primary">make new card</Button>
+        <EditCard cardData={cardList[currentCardIndex]} index={currentCardIndex} ></EditCard>
+      </div>
+      <div className='cardBucket'>
+        {bottomCards}
+      </div>
+    </>
+  }
+
   function makeNewCard() {
     const newCard = JSON.parse(JSON.stringify(defaultCard));
     cardList.splice(currentCardIndex+1, 0, newCard);
@@ -61,24 +92,10 @@ export default function Document() {
 
   return (
     <div>
-      <Button onClick={exportSVG} variant="primary">export svg</Button>
-      <Button onClick={exportPNG} variant="primary">export png</Button>
+      {/* <Button onClick={exportSVG} variant="primary">export svg</Button>
+      <Button onClick={exportPNG} variant="primary">export png</Button> */}
 
-      <Button onClick={makeNewCard} variant="primary">make new card</Button>
-
-      {cardList.map((card, i) => (
-        <div key={`card-${i}`}>
-          {
-            i == currentCardIndex
-              ? <EditCard cardData={card} index={i} ></EditCard>
-              : <div onClick={() => setCurrentCardIndex(i)}>
-                  card {i} 
-                  {i == currentCardIndex && <> is current card</>}:
-                  <CardSvg data={card} index={i} />
-                </div>
-          }
-        </div>
-      ))}
+      {cardGroups()}
     </div>
   )
 }
@@ -106,7 +123,7 @@ function EditCard({cardData, index}: {cardData: CardData, index: number}) {
         </Row>
       </Container>
       
-      {JSON.stringify(cardData)}
+      {/* {JSON.stringify(cardData)} */}
     </>
   )
 }
