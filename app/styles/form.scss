@@ -38,7 +38,7 @@ $layerBorderRadius: 10px;
 
 .colorLayers {
   &:first-child {
-    .colorLayer > .colorType {
+    .colorLayer > .colorType, .textRow {
       border-top-left-radius: $layerBorderRadius;
     }
   }
@@ -51,6 +51,10 @@ $layerBorderRadius: 10px;
       &:nth-last-child(3) {
         border-bottom-left-radius: $layerBorderRadius;
       }
+    }
+
+    .textRow {
+      border-bottom-left-radius: $layerBorderRadius;
     }
   }
 }
@@ -98,4 +102,15 @@ $layerBorderRadius: 10px;
       left: -0.75rem;
     }
   }
+}
+
+
+.tabTitle .nav-link {
+  text-transform: capitalize;
+}
+.tabBody {
+  border: 1px solid var(--bs-border-color);
+  border-top: 0;
+  border-bottom-left-radius: var(--bs-border-radius);
+  border-bottom-right-radius: var(--bs-border-radius);
 }

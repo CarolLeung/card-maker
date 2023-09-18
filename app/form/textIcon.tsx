@@ -13,10 +13,10 @@ export default function TextIcon({propKey, setCardData, position} : textIconI)  
   const layer = data[propKey][position].icon;
   const [waitForUpdate, setWait] = useState(false);
 
-  return <Container className='colorLayers'>
+  return <Container className='textIcon colorLayers'>
     {
       layer && <Row className={`colorLayer p-0`}>
-        <Col className='p-2'>
+        <Col className='p-2 textRow'>
           <Form.Control type="color" value={layer.color} onChange={e => {
             layer.color = e.target.value;
             // add delay to update color input so it doesn't lag
@@ -31,7 +31,7 @@ export default function TextIcon({propKey, setCardData, position} : textIconI)  
         </Col>
         {/* delete button */}
         <Button variant="danger" className="btn-close" onClick={() => {
-          data[propKey][position].icon = {};
+          delete data[propKey][position].icon;
           setCardData(data);
         }}></Button>
       </Row>

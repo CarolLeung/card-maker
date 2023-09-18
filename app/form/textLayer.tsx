@@ -31,9 +31,9 @@ export default function TextLayer({propKey, index, setCardData, position} : text
     </ToggleButton>
   }
 
-  return <Container className='colorLayers'>
+  return <Container className='textLayer colorLayers'>
     <Row className={`colorLayer ${layer.type} p-0`}>
-      <Col className='p-2'>
+      <Col className='p-2 textRow'>
         <Form.Control type="text" placeholder="input text" value={layer.value} onChange={e => textInput(e.target.value)}/>
         <InputGroup>
           <ToggleButtonGroup type="checkbox" name={`${propKey}-${position}-${index}`}>
@@ -63,7 +63,8 @@ export default function TextLayer({propKey, index, setCardData, position} : text
             }
             setCardData(data);
           } }/>
-          <div>change font</div>
+          {/* TODO */}
+          {/* <div>change font</div> */}
         </InputGroup>
 
       </Col>
